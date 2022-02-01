@@ -5,14 +5,17 @@ import Settings from './imgs/Settings.svg'
 import { useState, useEffect } from 'react'
 
 const Menu = ({ setActiveTab, activeTab }) => {
-    const [menuItems, setMenuItems] = useState([
-        {name: 'Home', icon: Home, color: null},
-        {name: 'Goals', icon: Goals, color: null},
-        {name: 'Search', icon: Search, color: null},
-        {name: 'Settings', icon: Settings, color: null}
-    ])
+    let className = {
+        notSelected: 'menu-item',
+        selected: 'menu-item menu-item--active'
+    }
 
-    const selectedBackgroundColor = 'rgb(180, 115, 255)'
+    const [menuItems, setMenuItems] = useState([
+        {name: 'Home', icon: Home, style: className.notSelected},
+        {name: 'Goals', icon: Goals, style: className.notSelected},
+        {name: 'Search', icon: Search, style: className.notSelected},
+        {name: 'Settings', icon: Settings, style: className.notSelected}
+    ])
 
     const handleClick = (e) => {
         setActiveTab(e.target.innerText);
@@ -20,12 +23,11 @@ const Menu = ({ setActiveTab, activeTab }) => {
 
     useEffect(() => {
         if (activeTab) {
-            const newMenu = [...menuItems]
-            const unselectedItems = newMenu.filter(item => item.name !== activeTab);
-            const selectedItem = newMenu.find(item => item.name === activeTab);
-            unselectedItems.map(item => item.color = null)
-            selectedItem.color = selectedBackgroundColor;
-            setMenuItems(newMenu)    
+            const newMenuItems = [...menuItems];
+            newMenuItems.map(tab => tab.style = className.notSelected);
+            const selectedTab = newMenuItems.find(tab => tab.name === activeTab);
+            selectedTab.style = className.selected;
+            setMenuItems(newMenuItems);
         }
     }, [activeTab])
 
@@ -34,7 +36,10 @@ const Menu = ({ setActiveTab, activeTab }) => {
             <ul>
                 {menuItems.map(item => {
                     return (
-                        <li key={item.name} onClick={handleClick} style={{backgroundColor: item.color}}>
+                        <li
+                        className={item.style}
+                        key={item.name}
+                        onClick={handleClick}>
                             <img src={item.icon} alt={`${item.name} icon`}/>
                             {item.name}
                         </li>
