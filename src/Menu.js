@@ -2,6 +2,7 @@ import Home from './imgs/Home.svg'
 import Goals from './imgs/Goals.svg'
 import Search from './imgs/Search.svg'
 import Settings from './imgs/Settings.svg'
+import Tasks from './imgs/Tasks.svg'
 import { useState, useEffect } from 'react'
 
 const Menu = ({ setActiveTab, activeTab }) => {
@@ -31,8 +32,16 @@ const Menu = ({ setActiveTab, activeTab }) => {
         }
     }, [activeTab])
 
+    const handleLogoClick = () => {
+        setActiveTab('Home');
+    }
+
     return (
         <nav className="menu">
+            <button className='logo' onClick={handleLogoClick}>
+                <img src={Tasks} alt='Tasks icon'/>
+                <h1>Tasks</h1>
+            </button>
             <ul>
                 {menuTabs.map(tab => {
                     return (
