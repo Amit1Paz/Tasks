@@ -10,7 +10,7 @@ const Menu = ({ setActiveTab, activeTab }) => {
         selected: 'menu-item menu-item--active'
     }
 
-    const [menuItems, setMenuItems] = useState([
+    const [menuTabs, setMenuTabs] = useState([
         {name: 'Home', icon: Home, style: className.notSelected},
         {name: 'Goals', icon: Goals, style: className.notSelected},
         {name: 'Search', icon: Search, style: className.notSelected},
@@ -23,25 +23,25 @@ const Menu = ({ setActiveTab, activeTab }) => {
 
     useEffect(() => {
         if (activeTab) {
-            const newMenuItems = [...menuItems];
-            newMenuItems.map(tab => tab.style = className.notSelected);
-            const selectedTab = newMenuItems.find(tab => tab.name === activeTab);
+            const newMenuTabs = [...menuTabs];
+            newMenuTabs.map(tab => tab.style = className.notSelected);
+            const selectedTab = newMenuTabs.find(tab => tab.name === activeTab);
             selectedTab.style = className.selected;
-            setMenuItems(newMenuItems);
+            setMenuTabs(newMenuTabs);
         }
     }, [activeTab])
 
     return (
         <nav className="menu">
             <ul>
-                {menuItems.map(item => {
+                {menuTabs.map(tab => {
                     return (
                         <li
-                        className={item.style}
-                        key={item.name}
+                        className={tab.style}
+                        key={tab.name}
                         onClick={handleClick}>
-                            <img src={item.icon} alt={`${item.name} icon`}/>
-                            {item.name}
+                            <img src={tab.icon} alt={`${tab.name} icon`}/>
+                            {tab.name}
                         </li>
                     ) 
                 })}
