@@ -2,6 +2,7 @@ import Home from './imgs/Home.svg'
 import Goals from './imgs/Goals.svg'
 import Search from './imgs/Search.svg'
 import Settings from './imgs/Settings.svg'
+import Tasks from './imgs/Tasks.svg'
 import { useState, useEffect } from 'react'
 
 const Menu = ({ setActiveTab, activeTab }) => {
@@ -10,7 +11,7 @@ const Menu = ({ setActiveTab, activeTab }) => {
         selected: 'menu-item menu-item--active'
     }
 
-    const [menuItems, setMenuItems] = useState([
+    const [menuTabs, setMenuTabs] = useState([
         {name: 'Home', icon: Home, style: className.notSelected},
         {name: 'Goals', icon: Goals, style: className.notSelected},
         {name: 'Search', icon: Search, style: className.notSelected},
@@ -23,25 +24,33 @@ const Menu = ({ setActiveTab, activeTab }) => {
 
     useEffect(() => {
         if (activeTab) {
-            const newMenuItems = [...menuItems];
-            newMenuItems.map(tab => tab.style = className.notSelected);
-            const selectedTab = newMenuItems.find(tab => tab.name === activeTab);
+            const newMenuTabs = [...menuTabs];
+            newMenuTabs.map(tab => tab.style = className.notSelected);
+            const selectedTab = newMenuTabs.find(tab => tab.name === activeTab);
             selectedTab.style = className.selected;
-            setMenuItems(newMenuItems);
+            setMenuTabs(newMenuTabs);
         }
     }, [activeTab])
 
+    const handleLogoClick = () => {
+        setActiveTab('Home');
+    }
+
     return (
         <nav className="menu">
+            <button className='logo' onClick={handleLogoClick}>
+                <img src={Tasks} alt='Tasks icon'/>
+                <h1>Tasks</h1>
+            </button>
             <ul>
-                {menuItems.map(item => {
+                {menuTabs.map(tab => {
                     return (
                         <li
-                        className={item.style}
-                        key={item.name}
+                        className={tab.style}
+                        key={tab.name}
                         onClick={handleClick}>
-                            <img src={item.icon} alt={`${item.name} icon`}/>
-                            {item.name}
+                            <img src={tab.icon} alt={`${tab.name} icon`}/>
+                            {tab.name}
                         </li>
                     ) 
                 })}
