@@ -19,7 +19,7 @@
 }
 html {
     background-color: var(--dark-background);
-    color: var(--white);
+    color: var(--light-gray);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -38,7 +38,7 @@ button {
 
 /* menu */
 .menu {
-    padding: 1rem 1.5rem;
+    padding: 0.9rem 0.5rem;
     background-color: var(--gray-background);
     color: var(--light-gray);
     height: 100vh;
@@ -62,6 +62,7 @@ h1 {
     gap: 1rem;
     padding: 0.3rem 0 0.3rem 0.5rem;
     border-radius: 0.3rem;
+    font-size: 0.8rem;
     transition: 0.3s;
 }
 .menu-tab:hover {
@@ -76,7 +77,7 @@ h1 {
     background-color: var(--light-purple);
 }
 .menu-tab img {
-    width: 1.3rem;
+    width: 1.1rem;
 }
 .menu__selected {
     background-color: var(--light-purple);
@@ -98,6 +99,7 @@ h1 {
 }
 .top-bar__headline {
     font-size: 1.3rem;
+    color: var(--white);
 }
 .top-bar__left-side {
     display: flex;
@@ -123,4 +125,9 @@ h1 {
     height: 1.3rem;
     border-radius: 50%;
     outline: 2px solid var(--light-purple);
+}
+
+/* content-container */
+.content-container {
+    padding: 2.5rem 5rem;
 }

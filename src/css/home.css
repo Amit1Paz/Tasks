@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    /* background */
+    --dark-background: #121212;
+    --gray-background: #323232;
+    /* solid colors */
+    --white: #FFF;
+    /* reusable */
+    --dark-gray: rgb(99, 99, 99);
+    --light-gray: rgb(204, 204, 204);
+    --light-purple: rgb(180, 115, 255);
+    /* hover */
+    --menu-hover: rgba(255, 255, 255, 0.1);
+}
+.home-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.greeting h3 {
+    color: var(--white);
+}
+.add-task-btn {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: var(--light-purple);
+    transition: 0.1s;
+    transform: rotate(-90deg);
+}
+.add-task-btn:hover {
+    transition: 0.1s;
+    transform: scale(1.1) rotate(-90deg);
+}
+.add-task-btn:active {
+    transition: 0.3s;
+    background-color: var(--light-gray);
+}
+
+/* AddTaskForm */
+.add-task-form {
+    position: absolute;
+    right: 9rem;
+    top: 5.8rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-background);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 0.8rem;
+}
+input {
+    border: none;
+    outline: none;
+    border-radius: 0.3rem;
+    padding: 0.3rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--light-gray);
+}
+.add-task-form__submit {
+    border: none;
+    outline: none;
+    margin-top: 1rem;
+    background-color: var(--light-purple);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+}
