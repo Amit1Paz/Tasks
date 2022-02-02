@@ -15,7 +15,6 @@ const Tasklist = () => {
     }
     useEffect(() => {
         if (selectedSort) {
-            console.log(selectedSort)
             const newSortList = [...sortList];
             newSortList.map(item => item.className = null);
             const sort = newSortList.find(item => item.name === selectedSort);
