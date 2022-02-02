@@ -6,6 +6,7 @@ import Settings from './Settings';
 import TopBar from './TopBar';
 
 function App() {
+  const [name, setName] = useState('Amit')
   const [activeTab, setActiveTab] = useState('Home');
   return (
     <div className='container'>
@@ -13,7 +14,7 @@ function App() {
       <div className='main-container'>
         <TopBar activeTab={activeTab} />
         {activeTab === 'Settings' && <Settings />}
-        {activeTab === 'Home' && <Home />}
+        {activeTab === 'Home' && <Home name={name} />}
       </div>
     </div>
   );

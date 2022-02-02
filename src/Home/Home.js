@@ -1,9 +1,9 @@
 import React from 'react';
-
-const Home = () => {
+import HomeHeader from './HomeHeader'
+const Home = ({ name }) => {
     return (
         <div>
-            home
+            <HomeHeader name={name}/>
         </div>
     );
 }
