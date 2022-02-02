@@ -13,6 +13,7 @@
     --dark-gray: rgb(99, 99, 99);
     --light-gray: rgb(204, 204, 204);
     --light-purple: rgb(180, 115, 255);
+    --lightest-purple: rgb(210, 170, 255);
     /* hover */
     --menu-hover: rgba(255, 255, 255, 0.1);
 }
@@ -88,4 +89,11 @@ input {
     display: flex;
     gap: 0.5rem;
     font-size: 0.8rem;
+}
+.sort li {
+    cursor: pointer;
+}
+.selected-sort {
+    color: var(--lightest-purple);
+    border-bottom: 1px solid var(--lightest-purple);
 }
