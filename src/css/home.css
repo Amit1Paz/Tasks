@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    /* background */
+    --dark-background: #121212;
+    --gray-background: #323232;
+    /* solid colors */
+    --white: #FFF;
+    /* reusable */
+    --dark-gray: rgb(99, 99, 99);
+    --light-gray: rgb(204, 204, 204);
+    --light-purple: rgb(180, 115, 255);
+    /* hover */
+    --menu-hover: rgba(255, 255, 255, 0.1);
+}
+.home-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.greeting h3 {
+    color: var(--white);
+}
+.add-task-btn {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: var(--light-purple);
+    transition: 0.1s;
+}
+.add-task-btn:hover {
+    transition: 0.1s;
+    transform: scale(1.1);
+}
+.add-task-btn:active {
+    transition: 0.3s;
+    background-color: var(--light-gray);
+}

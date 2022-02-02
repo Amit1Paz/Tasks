@@ -19,7 +19,7 @@
 }
 html {
     background-color: var(--dark-background);
-    color: var(--white);
+    color: var(--light-gray);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -98,6 +98,7 @@ h1 {
 }
 .top-bar__headline {
     font-size: 1.3rem;
+    color: var(--white);
 }
 .top-bar__left-side {
     display: flex;
@@ -123,4 +124,9 @@ h1 {
     height: 1.3rem;
     border-radius: 50%;
     outline: 2px solid var(--light-purple);
+}
+
+/* content-container */
+.content-container {
+    padding: 2.5rem 5rem;
 }

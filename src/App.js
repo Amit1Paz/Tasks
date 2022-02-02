@@ -13,8 +13,10 @@ function App() {
       <Menu setActiveTab={setActiveTab} activeTab={activeTab} />
       <div className='main-container'>
         <TopBar activeTab={activeTab} />
-        {activeTab === 'Settings' && <Settings />}
-        {activeTab === 'Home' && <Home name={name} />}
+        <div className='content-container'>
+          {activeTab === 'Settings' && <Settings />}
+          {activeTab === 'Home' && <Home name={name} />}
+        </div>
       </div>
     </div>
   );
