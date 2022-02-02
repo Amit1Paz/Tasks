@@ -1,7 +1,7 @@
 import './css/App.css';
 import { useState } from 'react';
 import Menu from "./Menu";
-import Home from './Home';
+import Home from './Home/Home';
 import Settings from './Settings';
 import TopBar from './TopBar';
 
