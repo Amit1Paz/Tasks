@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react'
 
 const Menu = ({ setActiveTab, activeTab }) => {
     let className = {
-        notSelected: 'menu-item',
-        selected: 'menu-item menu-item--active'
+        notSelected: 'menu-tab',
+        selected: 'menu-tab menu-tab--active'
     }
 
     const [menuTabs, setMenuTabs] = useState([
