@@ -81,3 +81,19 @@ h1 {
 .menu__selected {
     background-color: var(--menu-selected);
 }
+
+.main-container {
+    width: 100%;
+}
+/* TopBar */
+.top-bar {
+    outline: 1px solid white;
+    width: 100%;
+    height: 3rem;
+}
+/* .notifications {
+
+}
+.user-img {
+
+} */
