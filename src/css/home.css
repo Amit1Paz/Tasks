@@ -41,3 +41,35 @@
     transition: 0.3s;
     background-color: var(--light-gray);
 }
+
+/* AddTaskForm */
+.add-task-form {
+    position: absolute;
+    right: 9rem;
+    top: 5.8rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-background);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 0.8rem;
+}
+input {
+    border: none;
+    outline: none;
+    border-radius: 0.3rem;
+    padding: 0.3rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--light-gray);
+}
+.add-task-form__submit {
+    border: none;
+    outline: none;
+    margin-top: 1rem;
+    background-color: var(--light-purple);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+}

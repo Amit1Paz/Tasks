@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/home.css'
 import AddTaskForm from './AddTaskForm';
 const Homeheader = ({ name }) => {
     const [showAddForm, setShowAddForm] = useState(false);
+    const [btnContent, setBtnContent] = useState('+')
     const handleAddTaskClick = () => {
         setShowAddForm(!showAddForm)
     }
+
+    useEffect(() => {
+        showAddForm ? setBtnContent('-') : setBtnContent('+') 
+    }, [showAddForm])
 
     return (
         <div className='home-header-container'>
@@ -14,7 +19,7 @@ const Homeheader = ({ name }) => {
                 <p>Let's be productive</p>
             </div>
             { showAddForm && <AddTaskForm /> }
-            <button onClick={handleAddTaskClick} className='add-task-btn'>+</button>
+            <button onClick={handleAddTaskClick} className='add-task-btn'>{btnContent}</button>
         </div>
     );
 }
