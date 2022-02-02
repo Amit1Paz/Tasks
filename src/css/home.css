@@ -32,10 +32,11 @@
     color: white;
     background-color: var(--light-purple);
     transition: 0.1s;
+    transform: rotate(-90deg);
 }
 .add-task-btn:hover {
     transition: 0.1s;
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(-90deg);
 }
 .add-task-btn:active {
     transition: 0.3s;

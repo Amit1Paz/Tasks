@@ -1,13 +1,15 @@
 import './css/App.css';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Menu from "./Menu";
 import Home from './Home/Home';
 import Settings from './Settings';
 import TopBar from './TopBar';
 
 function App() {
-  const [name, setName] = useState('Amit')
+  const [name, setName] = useState('Amit');
   const [activeTab, setActiveTab] = useState('Home');
+  const [tasksList, setTasksList] = useState([]);
+  
   return (
     <div className='container'>
       <Menu setActiveTab={setActiveTab} activeTab={activeTab} />
@@ -15,7 +17,7 @@ function App() {
         <TopBar activeTab={activeTab} />
         <div className='content-container'>
           {activeTab === 'Settings' && <Settings />}
-          {activeTab === 'Home' && <Home name={name} />}
+          {activeTab === 'Home' && <Home name={name} setTasksList={setTasksList} tasksList={tasksList}/>}
         </div>
       </div>
     </div>

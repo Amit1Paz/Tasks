@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import '../css/home.css'
 import AddTaskForm from './AddTaskForm';
-const Homeheader = ({ name }) => {
+const Homeheader = ({ name, setTasksList, tasksList }) => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [btnContent, setBtnContent] = useState('+')
-    const handleAddTaskClick = () => {
-        setShowAddForm(!showAddForm)
+    const [btnRotation, setBtnRotation] = useState('-90deg')
+
+    const handleAddTaskClick = (e) => {
+        setShowAddForm(!showAddForm);
     }
 
     useEffect(() => {
-        showAddForm ? setBtnContent('-') : setBtnContent('+') 
+        if (showAddForm) {
+            setBtnContent('-');
+            setBtnRotation('0deg');
+        } else {
+            setBtnContent('+');
+            setBtnRotation('-90deg');
+        } 
     }, [showAddForm])
 
     return (
@@ -18,8 +26,13 @@ const Homeheader = ({ name }) => {
                 <h3>Hi {name},</h3>
                 <p>Let's be productive</p>
             </div>
-            { showAddForm && <AddTaskForm /> }
-            <button onClick={handleAddTaskClick} className='add-task-btn'>{btnContent}</button>
+            { showAddForm && <AddTaskForm setShowAddForm={setShowAddForm} setTasksList={setTasksList} tasksList={tasksList}/> }
+            <button
+            onClick={handleAddTaskClick}
+            className='add-task-btn'
+            style={{transform: `rotate(${btnRotation})`}}>
+            {btnContent}
+            </button>
         </div>
     );
 }
