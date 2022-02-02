@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Tasklist = () => {
-    const SortList = ['Name', 'Date', 'Status'];
+    const SortList = ['Name', 'Date', 'Status', 'Custom'];
 
     return (
-        <div>
+        <div className='tasks-list-container'>
             <h3>Tasks:</h3>
             <div className='sort'>
                 <h5>Sort:</h5>

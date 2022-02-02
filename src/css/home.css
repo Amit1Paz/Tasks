@@ -74,3 +74,18 @@ input {
     font-size: 1rem;
     padding: 0.5rem 0;
 }
+
+/* TasksList */ 
+.tasks-list-container {
+    padding: 3rem 0;
+}
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.sort ul {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
