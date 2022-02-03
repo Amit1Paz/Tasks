@@ -26,10 +26,18 @@ const Task = ({tasksList}) => {
     const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(false);
     
     useEffect(() => {
-
+        for (let i = 0; i < status.length; i++) {
+            if (currentStatus === status[i].status) {
+                setSNum(i);
+            }
+        }
     }, [currentStatus])
     useEffect(() => {
-
+        for (let i = 0; i < priority.length; i++) {
+            if (currentPriority === priority[i].priority) {
+                setPNum(i);
+            }
+        }
     }, [currentPriority])
 
     const handleStatusClick = () => {
