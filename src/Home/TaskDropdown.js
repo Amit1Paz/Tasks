@@ -21,12 +21,20 @@ const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu
                 </ul>
             )
         } else if (showStatusDropdownMenu) {
-            const filtered = status.filter(status => status.priority !== currentStatus);
+            const filterd = status.filter(status => status.status !== currentStatus);
             setDropdown(
-                <ul className='task-drop-down'>
+                <ul className='task-dropdown'>
+                    {filterd.map(option => {
+                        return (
+                            <li key={option.status}
+                            className='task-dropdown__option'
+                            style={{backgroundColor: `${option.background}`}}>
+                                {option.status}
+                            </li>
+                        )
+                    })}
                 </ul>
-            )
-        } else {
+            )} else {
             return null
         }
     }, [showPriorityDropdownMenu, showStatusDropdownMenu])

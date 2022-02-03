@@ -21,7 +21,18 @@ const Task = ({tasksList}) => {
     const [showStatusDropdownMenu, setShowStatusDropdownMenu] = useState(false);
     const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(false);
     
-
+    const handleStatusClick = () => {
+        setShowStatusDropdownMenu(!showStatusDropdownMenu)
+        if (showPriorityDropdownMenu) {
+            setShowPriorityDropdownMenu(false)
+        }
+    }
+    const handlePriorityClick = () => {
+        setShowPriorityDropdownMenu(!showPriorityDropdownMenu)
+        if (showStatusDropdownMenu) {
+            setShowStatusDropdownMenu(false)
+        }
+    }
     return <div>
         {tasksList.map(task => {
             return <ul key={task.index} className='task-ul-container'>
@@ -30,7 +41,7 @@ const Task = ({tasksList}) => {
                 </li>
 
                 <ul className='task-priority'
-                onClick={() => setShowPriorityDropdownMenu(!showPriorityDropdownMenu)}
+                onClick={handlePriorityClick}
                 style={{backgroundColor: `${priority[0].background}`}}>
                     <li>
                         {task.priority = currentPriority}
@@ -44,6 +55,7 @@ const Task = ({tasksList}) => {
                 </ul>
 
                 <ul className='task-status'
+                onClick={handleStatusClick}
                 style={{backgroundColor: `${status[0].background}`}}>
                     <li>
                         {task.status = currentStatus}
