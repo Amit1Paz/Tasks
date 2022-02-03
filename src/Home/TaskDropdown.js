@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import colors from '../colors';
 
-const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu, showStatusDropdownMenu, priority, status}) => {
+const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu, showStatusDropdownMenu, priority, status, setCurrentStatus, setCurrentPriority }) => {
     const [dropdown, setDropdown] = useState(null);
+    
+    const handlePriorityChoose = (e) => {
+        setCurrentPriority(e.target.innerText)
+    }
+    const handleStatusChoose = (e) => {
+        setCurrentStatus(e.target.innerText)
+    }
 
     useEffect(() => {
         if (showPriorityDropdownMenu) {
@@ -12,6 +19,7 @@ const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu
                     {filterd.map(option => {
                         return (
                             <li key={option.priority}
+                            onClick={handlePriorityChoose}
                             className='task-dropdown__option'
                             style={{backgroundColor: `${option.background}`}}>
                                 {option.priority}
@@ -27,6 +35,7 @@ const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu
                     {filterd.map(option => {
                         return (
                             <li key={option.status}
+                            onClick={handleStatusChoose}
                             className='task-dropdown__option'
                             style={{backgroundColor: `${option.background}`}}>
                                 {option.status}

@@ -51,6 +51,7 @@ const Task = ({tasksList}) => {
                     currentPriority={currentPriority}
                     showPriorityDropdownMenu={showPriorityDropdownMenu}
                     priority={priority}
+                    setCurrentPriority={setCurrentPriority}
                     />}
                 </ul>
 
@@ -65,6 +66,7 @@ const Task = ({tasksList}) => {
                     currentPriority={currentPriority}
                     showStatusDropdownMenu={showStatusDropdownMenu}
                     status={status}
+                    setCurrentStatus={setCurrentStatus}
                     />}    
                 </ul>
 
