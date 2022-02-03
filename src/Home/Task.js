@@ -18,8 +18,8 @@ const Task = ({tasksList}) => {
 
     const [currentStatus, setCurrentStatus] = useState(status[0].status);
     const [currentPriority, setCurrentPriority] = useState(priority[0].priority);
-    const [showStatusDropdownMenu, setShowStatusDropdownMenu] = useState(true);
-    const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(true);
+    const [showStatusDropdownMenu, setShowStatusDropdownMenu] = useState(false);
+    const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(false);
     
 
     return <div>
@@ -30,6 +30,7 @@ const Task = ({tasksList}) => {
                 </li>
 
                 <ul className='task-priority'
+                onClick={() => setShowPriorityDropdownMenu(!showPriorityDropdownMenu)}
                 style={{backgroundColor: `${priority[0].background}`}}>
                     <li>
                         {task.priority = currentPriority}
@@ -38,7 +39,7 @@ const Task = ({tasksList}) => {
                     currentStatus={currentStatus}
                     currentPriority={currentPriority}
                     showPriorityDropdownMenu={showPriorityDropdownMenu}
-                    showStatusDropdownMenu={showStatusDropdownMenu}
+                    priority={priority}
                     />}
                 </ul>
 
@@ -47,11 +48,11 @@ const Task = ({tasksList}) => {
                     <li>
                         {task.status = currentStatus}
                     </li>
-                    {showPriorityDropdownMenu &&<TaskDropdown
+                    {showStatusDropdownMenu &&<TaskDropdown
                     currentStatus={currentStatus}
                     currentPriority={currentPriority}
-                    showPriorityDropdownMenu={showPriorityDropdownMenu}
                     showStatusDropdownMenu={showStatusDropdownMenu}
+                    status={status}
                     />}    
                 </ul>
 
