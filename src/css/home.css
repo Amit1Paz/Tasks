@@ -144,7 +144,6 @@ input {
 /* TaskDropdown */
 .task-dropdown {
     position: absolute;
-    background-color: white;
     width: 100%;
     top: 3rem;
     left: 0;
@@ -154,9 +153,8 @@ input {
     justify-content: center;
     align-items: center;
     height: 3rem;
-}
-.task-dropdown__option:nth-child(1) {
-    animation: name duration timing-function delay iteration-count direction fill-mode;
+    opacity: 0;
+    animation: task-dropdown-option 0.2s forwards ease-in;
 }
 @keyframes task-dropdown-option {
     from {opacity: 0;}
