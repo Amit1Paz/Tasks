@@ -97,3 +97,55 @@ input {
     color: var(--lightest-purple);
     border-bottom: 1px solid var(--lightest-purple);
 }
+
+/* task */
+.task-ul-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--gray-background);
+    border-radius: 0.5rem;
+    padding: 0.7rem 1rem;
+    margin: 1rem 0;
+}
+.task-conten, .task-priority, .task-status, .task-date-time, .task-delete {
+    position: relative;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    line-height: 1.2rem;
+    padding: 0.5rem;
+    flex-basis: 15%;
+    color: white;
+    margin: 0 0.2rem;
+}
+.task-content {
+    flex-basis: 30%;
+}
+
+.task-date-time {
+    background-color: var(--dark-background);
+    color: var(--white);
+    padding-top: 0.8rem;
+}
+.task-time {
+    font-size: 0.8rem;
+}
+.task-delete {
+    flex-basis: 5%;
+}
+.task-delete img {
+    width: 1rem;
+}
+
+/* TaskDropdown */
+.task-drop-down {
+    position: absolute;
+    border: 1px solid var(--light-gray);
+    width: 100%;
+    padding: 0.5rem 0;
+    top: 3rem;
+}
