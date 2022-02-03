@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Delete from '../imgs/Delete.svg';
 import colors from '../colors';
+import TaskDropdown from './TaskDropdown';
 
 const Task = ({tasksList}) => {
-
     const status = [
         {status: 'Not Started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
@@ -16,6 +16,12 @@ const Task = ({tasksList}) => {
         {priority: 'High', background: colors.priority.high}
     ]
 
+    const [currentStatus, setCurrentStatus] = useState(status[0].status);
+    const [currentPriority, setCurrentPriority] = useState(priority[0].priority);
+    const [showStatusDropdownMenu, setShowStatusDropdownMenu] = useState(true);
+    const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(true);
+    
+
     return <div>
         {tasksList.map(task => {
             return <ul key={task.index} className='task-ul-container'>
@@ -23,15 +29,31 @@ const Task = ({tasksList}) => {
                     <p>{task.content}</p>
                 </li>
 
-                <li className='task-priority'
+                <ul className='task-priority'
                 style={{backgroundColor: `${priority[0].background}`}}>
-                    {task.priority = priority[0].priority}
-                </li>
+                    <li>
+                        {task.priority = currentPriority}
+                    </li>
+                    {showPriorityDropdownMenu &&<TaskDropdown
+                    currentStatus={currentStatus}
+                    currentPriority={currentPriority}
+                    showPriorityDropdownMenu={showPriorityDropdownMenu}
+                    showStatusDropdownMenu={showStatusDropdownMenu}
+                    />}
+                </ul>
 
-                <li className='task-status'
+                <ul className='task-status'
                 style={{backgroundColor: `${status[0].background}`}}>
-                    {task.status = status[0].status}
-                </li>
+                    <li>
+                        {task.status = currentStatus}
+                    </li>
+                    {showPriorityDropdownMenu &&<TaskDropdown
+                    currentStatus={currentStatus}
+                    currentPriority={currentPriority}
+                    showPriorityDropdownMenu={showPriorityDropdownMenu}
+                    showStatusDropdownMenu={showStatusDropdownMenu}
+                    />}    
+                </ul>
 
                 <li className='task-date-time'>
                     <p>{task.date}</p>

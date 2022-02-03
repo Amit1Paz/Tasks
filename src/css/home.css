@@ -105,12 +105,12 @@ input {
     align-items: center;
     background-color: var(--gray-background);
     border-radius: 0.5rem;
-    height: 4rem;
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
     margin: 1rem 0;
 }
 .task-conten, .task-priority, .task-status, .task-date-time, .task-delete {
-    height: 100%;
+    position: relative;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,6 +129,7 @@ input {
 .task-date-time {
     background-color: var(--dark-background);
     color: var(--white);
+    padding-top: 0.8rem;
 }
 .task-time {
     font-size: 0.8rem;
@@ -138,4 +139,13 @@ input {
 }
 .task-delete img {
     width: 1rem;
+}
+
+/* TaskDropdown */
+.task-drop-down {
+    position: absolute;
+    border: 1px solid var(--light-gray);
+    width: 100%;
+    padding: 0.5rem 0;
+    top: 3rem;
 }
