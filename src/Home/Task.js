@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Delete from '../imgs/Delete.svg';
 import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
+import { useEffect } from 'react/cjs/react.development';
 
 const Task = ({tasksList}) => {
     const status = [
@@ -15,12 +16,22 @@ const Task = ({tasksList}) => {
         {priority: 'Medium', background: colors.priority.medium},
         {priority: 'High', background: colors.priority.high}
     ]
+    
+    const [sNum, setSNum] = useState(0);
+    const [pNum, setPNum] = useState(0)
 
-    const [currentStatus, setCurrentStatus] = useState(status[0].status);
-    const [currentPriority, setCurrentPriority] = useState(priority[0].priority);
+    const [currentStatus, setCurrentStatus] = useState(status[sNum].status);
+    const [currentPriority, setCurrentPriority] = useState(priority[pNum].priority);
     const [showStatusDropdownMenu, setShowStatusDropdownMenu] = useState(false);
     const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(false);
     
+    useEffect(() => {
+
+    }, [currentStatus])
+    useEffect(() => {
+
+    }, [currentPriority])
+
     const handleStatusClick = () => {
         setShowStatusDropdownMenu(!showStatusDropdownMenu)
         if (showPriorityDropdownMenu) {
@@ -42,7 +53,7 @@ const Task = ({tasksList}) => {
 
                 <ul className='task-priority'
                 onClick={handlePriorityClick}
-                style={{backgroundColor: `${priority[0].background}`}}>
+                style={{backgroundColor: `${priority[pNum].background}`}}>
                     <li>
                         {task.priority = currentPriority}
                     </li>
@@ -57,7 +68,7 @@ const Task = ({tasksList}) => {
 
                 <ul className='task-status'
                 onClick={handleStatusClick}
-                style={{backgroundColor: `${status[0].background}`}}>
+                style={{backgroundColor: `${status[sNum].background}`}}>
                     <li>
                         {task.status = currentStatus}
                     </li>
