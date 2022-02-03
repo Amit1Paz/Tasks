@@ -97,3 +97,45 @@ input {
     color: var(--lightest-purple);
     border-bottom: 1px solid var(--lightest-purple);
 }
+
+/* task */
+.task-ul-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--gray-background);
+    border-radius: 0.5rem;
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+}
+.task-conten, .task-priority, .task-status, .task-date-time, .task-delete {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    line-height: 1.2rem;
+    padding: 0.5rem;
+    flex-basis: 15%;
+    color: white;
+    margin: 0 0.2rem;
+}
+.task-content {
+    flex-basis: 30%;
+}
+
+.task-date-time {
+    background-color: var(--dark-background);
+    color: var(--white);
+}
+.task-time {
+    font-size: 0.8rem;
+}
+.task-delete {
+    flex-basis: 5%;
+}
+.task-delete img {
+    width: 1rem;
+}

@@ -9,6 +9,9 @@ const Addtaskform = ({ setShowAddForm, setTasksList, tasksList}) => {
         e.preventDefault()
         setShowAddForm(false)
         setTasksList([...tasksList, {
+            index: `taskIndex${tasksList.length}`,
+            priority: 'Low',
+            status: 'Not Started',
             content: taskRef.current.value,
             date: dateRef.current.value,
             time: timeRef.current.value
