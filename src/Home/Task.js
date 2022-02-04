@@ -3,7 +3,7 @@ import Delete from '../imgs/Delete.svg';
 import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
 
-const Task = ({tasksList}) => {
+const Task = ({tasksList, setTasksList}) => {
     const status = [
         {status: 'Not Started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
@@ -31,6 +31,7 @@ const Task = ({tasksList}) => {
             }
         }
     }, [currentStatus])
+
     useEffect(() => {
         for (let i = 0; i < priority.length; i++) {
             if (currentPriority === priority[i].priority) {
@@ -45,12 +46,16 @@ const Task = ({tasksList}) => {
             setShowPriorityDropdownMenu(false)
         }
     }
-    const handlePriorityClick = () => {
+    const handlePriorityClick = (index) => {
         setShowPriorityDropdownMenu(!showPriorityDropdownMenu)
         if (showStatusDropdownMenu) {
             setShowStatusDropdownMenu(false)
         }
     }
+
+    // useEffect(() => {
+    //     console.log(tasksList)
+    // }, [tasksList])
     return <div>
         {tasksList.map(task => {
             return <ul key={task.index} className='task-ul-container'>
@@ -59,26 +64,28 @@ const Task = ({tasksList}) => {
                 </li>
 
                 <ul className='task-priority'
-                onClick={handlePriorityClick}
+                onClick={() => handlePriorityClick(task.index)}
                 style={{backgroundColor: `${priority[pNum].background}`}}>
                     <li>
-                        {task.priority = currentPriority}
+                        {task.priority}
                     </li>
                     {showPriorityDropdownMenu &&<TaskDropdown
+                    taskIndex={task.index}
                     currentStatus={currentStatus}
                     currentPriority={currentPriority}
                     showPriorityDropdownMenu={showPriorityDropdownMenu}
                     priority={priority}
                     setCurrentPriority={setCurrentPriority}
                     tasksList={tasksList}
+                    setTasksList={setTasksList}
                     />}
                 </ul>
 
                 <ul className='task-status'
-                onClick={handleStatusClick}
+                onClick={() => handleStatusClick(task.index)}
                 style={{backgroundColor: `${status[sNum].background}`}}>
                     <li>
-                        {task.status = currentStatus}
+                        {task.status}
                     </li>
                     {showStatusDropdownMenu &&<TaskDropdown
                     currentStatus={currentStatus}
@@ -86,6 +93,7 @@ const Task = ({tasksList}) => {
                     showStatusDropdownMenu={showStatusDropdownMenu}
                     status={status}
                     setCurrentStatus={setCurrentStatus}
+                    setTasksList={setTasksList}
                     />}    
                 </ul>
 

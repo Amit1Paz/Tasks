@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
 
-const Tasklist = ({tasksList}) => {
+const Tasklist = ({tasksList, setTasksList}) => {
     const [sortList, setSortList] = useState([
         {name: 'Name', selected: false, className: null},
         {name: 'Priority', selected: false, className: null},
@@ -36,7 +36,7 @@ const Tasklist = ({tasksList}) => {
                     })}
                 </ul>
             </div>
-            <Task tasksList={tasksList}/>
+            <Task tasksList={tasksList} setTasksList={setTasksList} />
         </div>
     );
 }

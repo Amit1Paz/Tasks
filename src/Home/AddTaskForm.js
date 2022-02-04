@@ -21,7 +21,7 @@ const Addtaskform = ({ setShowAddForm, setTasksList, tasksList}) => {
     }
 
     return (
-        <form className='add-task-form'>
+        <form className='add-task-form' onSubmit={handleFormSubmit}>
             <label htmlFor='task-input'>Task</label>
             <input ref={taskRef} id='task-input' type='text' placeholder='Insert task here...' required/>
             <label htmlFor='task-schedule-date'>Schedule date</label>
@@ -30,8 +30,7 @@ const Addtaskform = ({ setShowAddForm, setTasksList, tasksList}) => {
             <input ref={timeRef} id='task-schedule-time' type='time' required/>
             <input className='add-task-form__submit'
             type='submit'
-            value='Add task'
-            onClick={handleFormSubmit}/>
+            value='Add task'/>
         </form>
     );
 }
