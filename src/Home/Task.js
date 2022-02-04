@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Delete from '../imgs/Delete.svg';
 import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
-import { useEffect } from 'react/cjs/react.development';
 
 const Task = ({tasksList}) => {
     const status = [
@@ -16,7 +15,7 @@ const Task = ({tasksList}) => {
         {priority: 'Medium', background: colors.priority.medium},
         {priority: 'High', background: colors.priority.high}
     ]
-    
+
     const [sNum, setSNum] = useState(0);
     const [pNum, setPNum] = useState(0)
 
@@ -71,6 +70,7 @@ const Task = ({tasksList}) => {
                     showPriorityDropdownMenu={showPriorityDropdownMenu}
                     priority={priority}
                     setCurrentPriority={setCurrentPriority}
+                    tasksList={tasksList}
                     />}
                 </ul>
 

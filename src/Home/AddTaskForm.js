@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Addtaskform = ({ setShowAddForm, setTasksList, tasksList}) => {
     const taskRef = useRef();
@@ -9,7 +10,7 @@ const Addtaskform = ({ setShowAddForm, setTasksList, tasksList}) => {
         e.preventDefault()
         setShowAddForm(false)
         setTasksList([...tasksList, {
-            index: `taskIndex${tasksList.length}`,
+            index: `${uuidv4()}`,
             priority: 'Low',
             status: 'Not Started',
             content: taskRef.current.value,

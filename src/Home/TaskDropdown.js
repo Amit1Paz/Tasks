@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import colors from '../colors';
 
-const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu, showStatusDropdownMenu, priority, status, setCurrentStatus, setCurrentPriority }) => {
+const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu, showStatusDropdownMenu, priority, status, setCurrentStatus, setCurrentPriority, tasksList }) => {
     const [dropdown, setDropdown] = useState(null);
     
     const handlePriorityChoose = (e) => {
         setCurrentPriority(e.target.innerText)
+        console.log(e.target.parentElement.parentElement.parentElement.status = currentPriority)
     }
+    console.log(tasksList)
     const handleStatusChoose = (e) => {
         setCurrentStatus(e.target.innerText)
     }
