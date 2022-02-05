@@ -17,13 +17,13 @@ const Task = ({tasksList, setTasksList}) => {
     ]
 
     const [dropdownSelectedItem, setDropdownSelectedItem] = useState();
-    const [currentKey, setCurrentKey] = useState()
+    const [currentKey, setCurrentKey] = useState();
 
 
     useEffect(() => {
         for (let i = 0; i < status.length; i++) {
             if (dropdownSelectedItem === status[i].status) {
-                const newTasksList = [...tasksList]
+                const newTasksList = [...tasksList];
                 const selectedTask = newTasksList.find(task => task.index === currentKey);
                 selectedTask.status = dropdownSelectedItem;
                 setTasksList(newTasksList);
@@ -31,7 +31,7 @@ const Task = ({tasksList, setTasksList}) => {
         }
         for (let i = 0; i < priority.length; i++) {
             if (dropdownSelectedItem === priority[i].priority) {
-                const newTasksList = [...tasksList]
+                const newTasksList = [...tasksList];
                 const selectedTask = newTasksList.find(task => task.index === currentKey);
                 selectedTask.priority = dropdownSelectedItem;
                 setTasksList(newTasksList);
@@ -42,14 +42,20 @@ const Task = ({tasksList, setTasksList}) => {
     const handleBackgroundColor = (currentState) => {
         for (let i = 0; i < priority.length; i++) {
             if (currentState === priority[i].priority) {
-                return priority[i].background
+                return priority[i].background;
             }
         }
         for (let i = 0; i < status.length; i++) {
             if (currentState === status[i].status) {
-                return status[i].background
+                return status[i].background;
             }
         }
+    }
+
+    const handleDeleteTaskClick = (taskIndex) => {
+        const newTasksList = [...tasksList];
+        const filteredTasksList = newTasksList.filter(task => task.index !== taskIndex);
+        setTasksList(filteredTasksList);
     }
 
     return <ul>
@@ -76,7 +82,7 @@ const Task = ({tasksList, setTasksList}) => {
                     <li className='task-time'>{task.time}</li>
                 </ul>
                 
-                <li className='task-delete'>
+                <li className='task-delete' onClick={() => handleDeleteTaskClick(task.index)}>
                     <img src={Delete} alt='Delete'/>
                 </li>
             </ul>

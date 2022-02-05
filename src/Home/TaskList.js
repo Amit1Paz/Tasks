@@ -13,7 +13,7 @@ const Tasklist = ({tasksList, setTasksList}) => {
     const [selectedSort, setSelectedSort] = useState(sortList[0].name);
 
     const handleSortClick = (e) => {
-        setSelectedSort(e.target.innerText)
+        setSelectedSort(e.target.innerText);
     }
     useEffect(() => {
         if (selectedSort) {
@@ -21,7 +21,7 @@ const Tasklist = ({tasksList, setTasksList}) => {
             newSortList.map(item => item.className = null);
             const sort = newSortList.find(item => item.name === selectedSort);
             sort.className = 'selected-sort';
-            setSortList(newSortList)
+            setSortList(newSortList);
         }
     }, [selectedSort])
     
