@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Task from './Task';
 import TasksHeadlines from './TasksHeadlines';
+import TasksListContext from '../Contexts/TasksListContext';
 
 const Tasklist = () => {
+    const [tasksList, setTasksList] = useContext(TasksListContext);
+
     const [sortList, setSortList] = useState([
         {name: 'Newest', selected:false, className: null},
         {name: 'Priority', selected: false, className: null},
@@ -15,7 +18,32 @@ const Tasklist = () => {
 
     const handleSortClick = (e) => {
         setSelectedSort(e.target.innerText);
+
     }
+    
+    useEffect(() => {
+        const newTasksList = [...tasksList];
+        const lowerCaseSelectedSort = selectedSort.toLowerCase();
+        switch (lowerCaseSelectedSort) {
+            case 'priority':
+                const high = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'High');
+                const medium = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Medium');
+                const low = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Low');
+                setTasksList([...high, ...medium, ...low]);
+                break;
+            case 'status': 
+                const done = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Done');
+                const stuck = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Stuck');
+                const working = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Working on it');
+                const notStarted = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Not started');
+                setTasksList([...done, ...stuck, ...working, ...notStarted]);
+                break;
+            case 'date':
+                break;
+            
+        } 
+    }, [selectedSort, tasksList.length])
+
     useEffect(() => {
         if (selectedSort) {
             const newSortList = [...sortList];
