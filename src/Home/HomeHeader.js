@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/home.css'
 import AddTaskForm from './AddTaskForm';
-const Homeheader = ({ name, setTasksList, tasksList }) => {
+const Homeheader = ({ name }) => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [btnContent, setBtnContent] = useState('+')
     const [btnRotation, setBtnRotation] = useState('-90deg')
@@ -26,7 +26,7 @@ const Homeheader = ({ name, setTasksList, tasksList }) => {
                 <h3>Hi {name},</h3>
                 <p>Let's be productive</p>
             </div>
-            { showAddForm && <AddTaskForm setShowAddForm={setShowAddForm} setTasksList={setTasksList} tasksList={tasksList}/> }
+            { showAddForm && <AddTaskForm setShowAddForm={setShowAddForm} /> }
             <button
             onClick={handleAddTaskClick}
             className='add-task-btn'

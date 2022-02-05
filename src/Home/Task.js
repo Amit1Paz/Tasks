@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Delete from '../imgs/Delete.svg';
 import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
+import TasksListContext from '../Contexts/TasksListContext';
 
-const Task = ({tasksList, setTasksList}) => {
+const Task = () => {
+    const [tasksList, setTasksList] = useContext(TasksListContext);
     const status = [
         {status: 'Not Started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
