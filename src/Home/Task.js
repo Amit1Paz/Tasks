@@ -16,99 +16,71 @@ const Task = ({tasksList, setTasksList}) => {
         {priority: 'High', background: colors.priority.high}
     ]
 
-    const [sNum, setSNum] = useState(0);
-    const [pNum, setPNum] = useState(0)
+    const [dropdownSelectedItem, setDropdownSelectedItem] = useState();
+    const [currentKey, setCurrentKey] = useState()
 
-    const [currentStatus, setCurrentStatus] = useState(status[sNum].status);
-    const [currentPriority, setCurrentPriority] = useState(priority[pNum].priority);
-    const [showStatusDropdownMenu, setShowStatusDropdownMenu] = useState(false);
-    const [showPriorityDropdownMenu, setShowPriorityDropdownMenu] = useState(false);
-    
+
     useEffect(() => {
         for (let i = 0; i < status.length; i++) {
-            if (currentStatus === status[i].status) {
-                setSNum(i);
+            if (dropdownSelectedItem === status[i].status) {
+                const newTasksList = [...tasksList]
+                const selectedTask = newTasksList.find(task => task.index === currentKey);
+                selectedTask.status = dropdownSelectedItem;
+                setTasksList(newTasksList);
             }
         }
-    }, [currentStatus])
-
-    useEffect(() => {
         for (let i = 0; i < priority.length; i++) {
-            if (currentPriority === priority[i].priority) {
-                setPNum(i);
+            if (dropdownSelectedItem === priority[i].priority) {
+                const newTasksList = [...tasksList]
+                const selectedTask = newTasksList.find(task => task.index === currentKey);
+                selectedTask.priority = dropdownSelectedItem;
+                setTasksList(newTasksList);
+            } 
+        }
+    }, [dropdownSelectedItem])
+    
+    const handleBackgroundColor = (currentState) => {
+        for (let i = 0; i < priority.length; i++) {
+            if (currentState === priority[i].priority) {
+                return priority[i].background
             }
         }
-    }, [currentPriority])
-
-    const handleStatusClick = () => {
-        setShowStatusDropdownMenu(!showStatusDropdownMenu)
-        if (showPriorityDropdownMenu) {
-            setShowPriorityDropdownMenu(false)
-        }
-    }
-    const handlePriorityClick = (index) => {
-        setShowPriorityDropdownMenu(!showPriorityDropdownMenu)
-        if (showStatusDropdownMenu) {
-            setShowStatusDropdownMenu(false)
+        for (let i = 0; i < status.length; i++) {
+            if (currentState === status[i].status) {
+                return status[i].background
+            }
         }
     }
 
-    // useEffect(() => {
-    //     console.log(tasksList)
-    // }, [tasksList])
-    return <div>
+    return <ul>
         {tasksList.map(task => {
             return <ul key={task.index} className='task-ul-container'>
-                <li className='task-content'>
-                    <p>{task.content}</p>
-                </li>
+                <li className='task-content'>{task.content}</li>
 
-                <ul className='task-priority'
-                onClick={() => handlePriorityClick(task.index)}
-                style={{backgroundColor: `${priority[pNum].background}`}}>
+                <ul className='task-priority' style={{backgroundColor: handleBackgroundColor(task.priority)}}>
+                    <li>{task.priority}</li>
                     <li>
-                        {task.priority}
+                        <TaskDropdown priority={priority} status={status} setDropdownSelectedItem={setDropdownSelectedItem} setCurrentKey={setCurrentKey} id={task.index} handleBackgroundColor={handleBackgroundColor}/>
                     </li>
-                    {showPriorityDropdownMenu &&<TaskDropdown
-                    taskIndex={task.index}
-                    currentStatus={currentStatus}
-                    currentPriority={currentPriority}
-                    showPriorityDropdownMenu={showPriorityDropdownMenu}
-                    priority={priority}
-                    setCurrentPriority={setCurrentPriority}
-                    tasksList={tasksList}
-                    setTasksList={setTasksList}
-                    />}
                 </ul>
 
-                <ul className='task-status'
-                onClick={() => handleStatusClick(task.index)}
-                style={{backgroundColor: `${status[sNum].background}`}}>
+                <ul className='task-status' style={{backgroundColor: handleBackgroundColor(task.status)}}>
+                    <li>{task.status}</li>
                     <li>
-                        {task.status}
+                        <TaskDropdown priority={priority} status={status} setDropdownSelectedItem={setDropdownSelectedItem} setCurrentKey={setCurrentKey} id={task.index} handleBackgroundColor={handleBackgroundColor}/>
                     </li>
-                    {showStatusDropdownMenu &&<TaskDropdown
-                    currentStatus={currentStatus}
-                    currentPriority={currentPriority}
-                    showStatusDropdownMenu={showStatusDropdownMenu}
-                    status={status}
-                    setCurrentStatus={setCurrentStatus}
-                    setTasksList={setTasksList}
-                    />}    
                 </ul>
 
-                <li className='task-date-time'>
-                    <p>{task.date}</p>
-                    <p className='task-time'>{task.time}</p>
-                </li>
-
+                <ul className='task-date-time'>
+                    <li>{task.date}</li>
+                    <li className='task-time'>{task.time}</li>
+                </ul>
+                
                 <li className='task-delete'>
-                    <img src={Delete} alt='Delete' />
+                    <img src={Delete} alt='Delete'/>
                 </li>
-
             </ul>
         })}
-    </div> 
+    </ul>
 }
-
 export default Task;

@@ -1,60 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import colors from '../colors';
+import { v4 as uuidv4 } from 'uuid';
 
-const Taskdropdown = ({ currentStatus, currentPriority, showPriorityDropdownMenu, showStatusDropdownMenu, priority, status, setCurrentStatus, setCurrentPriority, tasksList, setTasksList, taskIndex }) => {
-    const [dropdown, setDropdown] = useState(null);
+const Taskdropdown = ({ priority, status, setDropdownSelectedItem, setCurrentKey, id, handleBackgroundColor }) => {
+    const [open, setOpen] = useState(false);
+    const [filteredPriority, setFilteredPriority] = useState();
+    const [filteredStatus, setFilteredStatus] = useState();
+    const [returnedDropdownList, setReturnedDropdownList] = useState([]);
+    const [selectedDropdown, setSelectedDropdown] = useState();
+
+    const handleOpenClick = (e) => {
+        setOpen(!open);
+        const parentElement = e.target.parentElement.parentElement;
+        setFilteredPriority(priority.filter(priority => priority.priority !== parentElement.firstChild.innerText));
+        setFilteredStatus(status.filter(status => status.status !== parentElement.firstChild.innerText));
+        const currentDropdownClass = e.target.parentElement.parentElement.className;
+        const slicedCurrentDropdownClass = currentDropdownClass.slice(5);
+        setSelectedDropdown(slicedCurrentDropdownClass);
+    }
     
-    const handlePriorityChoose = (e) => {
-        setCurrentPriority(e.target.innerText);
-        const newTaskList = [...tasksList];
-        const taskToChange = newTaskList.find(task => task.index === taskIndex);
-        taskToChange.priority = currentPriority
-        setTasksList(newTaskList)
-        console.log(tasksList)
-    }
-    const handleStatusChoose = (e) => {
-        setCurrentStatus(e.target.innerText)
-    }
-
     useEffect(() => {
-        if (showPriorityDropdownMenu) {
-            const filterd = priority.filter(priority => priority.priority !== currentPriority);
-            setDropdown(
-                <ul className='task-dropdown'>
-                    {filterd.map(option => {
-                        return (
-                            <li key={option.priority}
-                            onClick={handlePriorityChoose}
-                            className='task-dropdown__option'
-                            style={{backgroundColor: `${option.background}`}}>
-                                {option.priority}
-                            </li>
-                        )
-                    })}
-                </ul>
-            )
-        } else if (showStatusDropdownMenu) {
-            const filterd = status.filter(status => status.status !== currentStatus);
-            setDropdown(
-                <ul className='task-dropdown'>
-                    {filterd.map(option => {
-                        return (
-                            <li key={option.status}
-                            onClick={handleStatusChoose}
-                            className='task-dropdown__option'
-                            style={{backgroundColor: `${option.background}`}}>
-                                {option.status}
-                            </li>
-                        )
-                    })}
-                </ul>
-            )} else {
-            return null
+        if (selectedDropdown === 'priority') {
+            const priorities = filteredPriority.map(priority => priority = priority.priority);
+            setReturnedDropdownList(priorities);
+        } else if (selectedDropdown === 'status') {
+            const statuses = filteredStatus.map(status => status = status.status);
+            setReturnedDropdownList(statuses);
+        } else {
+            return
         }
-    }, [showPriorityDropdownMenu, showStatusDropdownMenu])
+    }, [open])
 
+    const handleChooseFromMenu = (e) => {
+        setDropdownSelectedItem(e.target.innerText);
+        setCurrentKey(id);
+    }
 
-    return dropdown
+    return <ul onClick={handleOpenClick} className='task-dropdown'>
+        {open && returnedDropdownList.map(el => {
+            return <li style={{background: handleBackgroundColor(el)}} key={uuidv4()} onClick={handleChooseFromMenu} className='task-dropdown__option'>
+                {el}
+            </li>
+        })} 
+    </ul>
 }
 
 export default Taskdropdown;

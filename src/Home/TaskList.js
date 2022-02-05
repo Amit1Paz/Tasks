@@ -3,7 +3,7 @@ import Task from './Task';
 
 const Tasklist = ({tasksList, setTasksList}) => {
     const [sortList, setSortList] = useState([
-        {name: 'Name', selected: false, className: null},
+        {name: 'Newest', selected:false, className: null},
         {name: 'Priority', selected: false, className: null},
         {name: 'Status', selected: false, className: null},
         {name: 'Date', selected: false, className: null},
@@ -36,7 +36,9 @@ const Tasklist = ({tasksList, setTasksList}) => {
                     })}
                 </ul>
             </div>
-            <Task tasksList={tasksList} setTasksList={setTasksList} />
+            <ul>
+                <Task tasksList={tasksList} setTasksList={setTasksList} />
+            </ul>
         </div>
     );
 }
