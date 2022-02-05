@@ -2,11 +2,11 @@ import HomeHeader from './HomeHeader';
 import TaskList from './TaskList'
 import React from 'react';
 
-const Home = ({ name, setTasksList, tasksList }) => {
+const Home = ({ name }) => {
     return (
         <div>
-            <HomeHeader name={name} setTasksList={setTasksList} tasksList={tasksList}/>
-            <TaskList tasksList={tasksList} setTasksList={setTasksList}/>
+            <HomeHeader name={name} />
+            <TaskList />
         </div>
     );
 }
