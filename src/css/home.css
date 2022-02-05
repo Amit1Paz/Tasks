@@ -148,9 +148,7 @@ input {
     width: 100%;
     top: 0;
     left: 0;
-    min-height: 3rem;
     padding-top: 3rem;
-    z-index: 200;
 }
 .task-dropdown__option {
     display: flex;

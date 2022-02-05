@@ -37,7 +37,7 @@ const Task = ({tasksList, setTasksList}) => {
                 setTasksList(newTasksList);
             } 
         }
-    }, [dropdownSelectedItem])
+    }, [dropdownSelectedItem, currentKey])
     
     const handleBackgroundColor = (currentState) => {
         for (let i = 0; i < priority.length; i++) {
