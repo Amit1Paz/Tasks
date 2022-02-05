@@ -109,6 +109,9 @@ input {
     padding: 0.7rem 1rem;
     margin: 1rem 0;
 }
+.task-ul-container:first-of-type {
+    margin-top: 0.5rem;
+}
 .task-conten, .task-priority, .task-status, .task-date-time, .task-delete {
     position: relative;
     height: 3rem;
@@ -155,4 +158,24 @@ input {
     justify-content: center;
     align-items: center;
     height: 3rem;
+}
+
+/* TaskHeadlines */
+.task-headlines {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    margin-top: 1rem;
+}
+.task-headlines li {
+    display: flex;
+    justify-content: center;
+    flex-basis: 15%;
+    margin: 0 0.2rem;
+}
+.task-headlines li:first-of-type {
+    flex-basis: 29.4%;
+}
+.task-headlines li:last-of-type {
+    flex-basis: 5%;
 }

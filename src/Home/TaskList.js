@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
+import TasksHeadlines from './TasksHeadlines';
 
 const Tasklist = () => {
     const [sortList, setSortList] = useState([
@@ -36,6 +37,7 @@ const Tasklist = () => {
                     })}
                 </ul>
             </div>
+            <TasksHeadlines />
             <ul>
                 <Task />
             </ul>
