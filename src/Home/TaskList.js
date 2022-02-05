@@ -18,7 +18,6 @@ const Tasklist = () => {
 
     const handleSortClick = (e) => {
         setSelectedSort(e.target.innerText);
-
     }
     
     useEffect(() => {
@@ -39,10 +38,22 @@ const Tasklist = () => {
                 setTasksList([...done, ...stuck, ...working, ...notStarted]);
                 break;
             case 'date':
+                const date = 'dateForSort';
+                const dateSortedList = newTasksList.sort((a, b) => {
+                    if (a[date] > b[date]) {
+                        console.log(a[date])
+                        return 1
+                    } else if (a[date] < b[date]) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                }).reverse();
+                setTasksList(dateSortedList);
                 break;
             
         } 
-    }, [selectedSort, tasksList.length])
+    }, [selectedSort])
 
     useEffect(() => {
         if (selectedSort) {

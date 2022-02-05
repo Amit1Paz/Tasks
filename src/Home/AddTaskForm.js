@@ -20,6 +20,7 @@ const Addtaskform = ({ setShowAddForm }) => {
             status: 'Not Started',
             content: taskRef.current.value,
             date: `${day}.${month}.${year}`,
+            dateForSort: dateRef.current.value.split('-').join(''),
             time: timeRef.current.value
             }, ...tasksList
         ])
