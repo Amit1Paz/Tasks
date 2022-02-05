@@ -41,7 +41,6 @@ const Tasklist = () => {
                 const date = 'dateForSort';
                 const dateSortedList = newTasksList.sort((a, b) => {
                     if (a[date] > b[date]) {
-                        console.log(a[date])
                         return 1
                     } else if (a[date] < b[date]) {
                         return -1
