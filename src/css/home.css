@@ -152,7 +152,6 @@ input {
     padding-top: 3rem;
     z-index: 200;
 }
-
 .task-dropdown__option {
     display: flex;
     justify-content: center;
