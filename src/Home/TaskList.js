@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
 
-const Tasklist = ({tasksList}) => {
+const Tasklist = ({tasksList, setTasksList}) => {
     const [sortList, setSortList] = useState([
-        {name: 'Name', selected: false, className: null},
+        {name: 'Newest', selected:false, className: null},
         {name: 'Priority', selected: false, className: null},
         {name: 'Status', selected: false, className: null},
         {name: 'Date', selected: false, className: null},
@@ -13,7 +13,7 @@ const Tasklist = ({tasksList}) => {
     const [selectedSort, setSelectedSort] = useState(sortList[0].name);
 
     const handleSortClick = (e) => {
-        setSelectedSort(e.target.innerText)
+        setSelectedSort(e.target.innerText);
     }
     useEffect(() => {
         if (selectedSort) {
@@ -21,7 +21,7 @@ const Tasklist = ({tasksList}) => {
             newSortList.map(item => item.className = null);
             const sort = newSortList.find(item => item.name === selectedSort);
             sort.className = 'selected-sort';
-            setSortList(newSortList)
+            setSortList(newSortList);
         }
     }, [selectedSort])
     
@@ -36,7 +36,9 @@ const Tasklist = ({tasksList}) => {
                     })}
                 </ul>
             </div>
-            <Task tasksList={tasksList}/>
+            <ul>
+                <Task tasksList={tasksList} setTasksList={setTasksList} />
+            </ul>
         </div>
     );
 }

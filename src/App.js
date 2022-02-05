@@ -8,8 +8,7 @@ import TopBar from './TopBar';
 function App() {
   const [name, setName] = useState('Amit');
   const [activeTab, setActiveTab] = useState('Home');
-  const [tasksList, setTasksList] = useState([{index: 'taskIndex0', content: 'amit', date: '30.09.94', time: '13:13'}]);
-  
+  const [tasksList, setTasksList] = useState([{index: 'taskIndex0', content: 'amit', date: '30.09.94', time: '13:13', priority: 'Low', status: 'Not Started'}]);
   return (
     <div className='container'>
       <Menu setActiveTab={setActiveTab} activeTab={activeTab} />

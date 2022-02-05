@@ -6,7 +6,7 @@ const Home = ({ name, setTasksList, tasksList }) => {
     return (
         <div>
             <HomeHeader name={name} setTasksList={setTasksList} tasksList={tasksList}/>
-            <TaskList tasksList={tasksList}/>
+            <TaskList tasksList={tasksList} setTasksList={setTasksList}/>
         </div>
     );
 }
