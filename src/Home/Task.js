@@ -63,7 +63,7 @@ const Task = () => {
 
     const dragStart = (e) => {
         e.target.style.opacity = 0.3;
-        setDragTarget(e.target)
+        setDragTarget(e.target);
 
     }
     const dragEnd = (e) => {
