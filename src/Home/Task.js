@@ -6,7 +6,9 @@ import TasksListContext from '../Contexts/TasksListContext';
 
 const Task = ({ setSort, setSelectedSort }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
-    const [dragTraget, setDragTarget] = useState()
+    const [dragTraget, setDragTarget] = useState();
+    const [dragParent, setDragParent] = useState();
+
     const status = [
         {status: 'Not started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
@@ -61,27 +63,30 @@ const Task = ({ setSort, setSelectedSort }) => {
         setTasksList(filteredTasksList);
     }
 
-    const dragStart = (e) => {
-        e.target.style.opacity = 0.3;
-        setDragTarget(e.target);
-        setSelectedSort('Custom')
+    const dragStart = (e, index) => {
+        e.target.style.opacity = 0.5;
+        setDragParent(e.target.parentElement);
+        const target = tasksList.find(task => task.index === index);
+        setDragTarget(target);
+        setSelectedSort('Custom');
     }
     const dragEnd = (e) => {
         e.target.style.opacity = 1;
     }
     const dragOver = (e) => {
-        e.preventDefault()
-        const y = e.clientY
-        const arr = [...dragTraget.parentElement.children]
+        e.preventDefault();
+        const y = e.clientY;
+        const arr = [...dragParent.children];
         arr.map(task => {
             const taskY = task.getBoundingClientRect().y;
-            console.log(y - taskY)
+            console.log(taskY)
+            // console.log(y - taskY)
         })
     }
 
     return <ul onDragOver={dragOver}>
         {tasksList.map(task => {
-            return <ul key={task.index} className='task-ul-container' draggable='true' onDragStart={dragStart} onDragEnd={dragEnd}>
+            return <ul key={task.index} className='task-ul-container' draggable='true' onDragStart={(e) => dragStart(e, task.index)} onDragEnd={dragEnd}>
                 <li className='task-content'>{task.content}</li>
 
                 <ul className='task-priority' style={{backgroundColor: handleBackgroundColor(task.priority)}}>
