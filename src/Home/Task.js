@@ -8,7 +8,7 @@ const Task = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [dragTraget, setDragTarget] = useState()
     const status = [
-        {status: 'Not Started', background: colors.status.notStarted},
+        {status: 'Not started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
         {status: 'Stuck', background: colors.status.stuck},
         {status: 'Done', background: colors.status.done}

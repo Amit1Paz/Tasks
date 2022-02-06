@@ -5,67 +5,58 @@ import TasksListContext from '../Contexts/TasksListContext';
 
 const Tasklist = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
-    const [lowerCaseSelectedSort, setLowerCaseSelectedSort] = useState()
+    const [order, setOrder] = useState([]);
+    const [sort, setSort] = useState();
 
     const [sortList, setSortList] = useState([
-        {name: 'Newest', selected:false, className: null},
+        {name: 'Custom', selected:false, className: null},
         {name: 'Priority', selected: false, className: null},
         {name: 'Status', selected: false, className: null},
-        {name: 'Date', selected: false, className: null},
-        {name: 'Custom', selected: false , className: null}
+        {name: 'Date', selected: false, className: null}
     ]);
 
     const [selectedSort, setSelectedSort] = useState(sortList[0].name);
 
     const handleSortClick = (e) => {
         setSelectedSort(e.target.innerText);
-        setLowerCaseSelectedSort(e.target.innerText.toLowerCase())
+        setSort(e.target.innerText.toLowerCase());
     }
 
-    
     useEffect(() => {
-        if (lowerCaseSelectedSort === 'priority') {
-            const order = ['High', 'Medium', 'Low']
-            const newTaskslist = tasksList.sort((a, b) => {
-                if (a[lowerCaseSelectedSort] === b[lowerCaseSelectedSort]) return 0
-                return order.indexOf(a[lowerCaseSelectedSort]) - order.indexOf(b[lowerCaseSelectedSort])
-            })
-            setTasksList(newTaskslist)
+        if (sort === 'priority') {
+            setOrder(['High', 'Medium', 'Low']);
+        } else if (sort === 'status') {
+            setOrder(['Done', 'Stuck', 'Working on it', 'Not started']);
+        } else if (sort === 'date') {
+            setOrder([2, 1]);
+        } else {
+            return
         }
-    }, [lowerCaseSelectedSort])
-    
-    // useEffect(() => {
-    //     const newTasksList = [...tasksList];
-    //     switch (lowerCaseSelectedSort) {
-    //         case 'priority':
-    //             const high = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'High');
-    //             const medium = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Medium');
-    //             const low = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Low');
-    //             setTasksList([...high, ...medium, ...low]);
-    //             break;
-    //         case 'status': 
-    //             const done = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Done');
-    //             const stuck = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Stuck');
-    //             const working = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Working on it');
-    //             const notStarted = newTasksList.filter(task => task[lowerCaseSelectedSort] === 'Not started');
-    //             setTasksList([...done, ...stuck, ...working, ...notStarted]);
-    //             break;
-    //         case 'date':
-    //             const date = 'dateForSort';
-    //             const dateSortedList = newTasksList.sort((a, b) => {
-    //                 if (a[date] > b[date]) {
-    //                     return 1
-    //                 } else if (a[date] < b[date]) {
-    //                     return -1
-    //                 } else {
-    //                     return 0
-    //                 }
-    //             }).reverse();
-    //             setTasksList(dateSortedList);
-    //             break;
-    //     } 
+    }, [sort])
 
-    // }, [selectedSort])
+    useEffect(() => {
+        if (order.length > 0) {
+            const newTasksList = [...tasksList];
+            if (sort !== 'date') {
+                newTasksList.sort((a, b) => {
+                    if (a[sort] === b[sort]) return 0
+                    return order.indexOf(a[sort]) - order.indexOf(b[sort])
+                })
+            } else if (sort === 'date') {
+                const date = 'dateForSort';
+                newTasksList.sort((a, b) => {
+                    if (a[date] > b[date]) {
+                        return -1
+                    } else if (a[date] < b[date]) {
+                        return 1
+                    } else {
+                        return 0
+                    }
+                })
+            }
+            setTasksList(newTasksList);
+        }
+    }, [order])
 
     useEffect(() => {
         if (selectedSort) {

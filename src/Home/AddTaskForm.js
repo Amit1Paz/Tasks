@@ -17,7 +17,7 @@ const Addtaskform = ({ setShowAddForm }) => {
         setTasksList([{
             index: `${uuidv4()}`,
             priority: 'Low',
-            status: 'Not Started',
+            status: 'Not started',
             content: taskRef.current.value,
             date: `${day}.${month}.${year}`,
             dateForSort: dateRef.current.value.split('-').join(''),
