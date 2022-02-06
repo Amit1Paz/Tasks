@@ -78,15 +78,16 @@ const Task = ({ setSort, setSelectedSort }) => {
         const y = e.clientY;
         const tasks = [...dragParent.children];
         const closestTask = tasks.reduce((closest, task) => {
+            const index = task.index
             const box = task.getBoundingClientRect();
             const offset = y - box.top - box.height / 2
             if (offset < 0 && offset > closest.offset) {
-                return {offset: offset, task: task}
+                return {offset: offset, task: index}
             } else {
                 return closest
             }
         }, { offset: Number.NEGATIVE_INFINITY })
-        // console.log(closestTask.task.index)
+        console.log(closestTask.task)
     }
 
     return <ul onDragOver={dragOver}>
