@@ -4,10 +4,11 @@ import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
 import TasksListContext from '../Contexts/TasksListContext';
 
-const Task = ({ setSort, setSelectedSort }) => {
+const Task = ({ setSelectedSort }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [dragTraget, setDragTarget] = useState();
     const [dragParent, setDragParent] = useState();
+    const [closestTask, setClosestTask] = useState();
 
     const status = [
         {status: 'Not started', background: colors.status.notStarted},
@@ -23,7 +24,6 @@ const Task = ({ setSort, setSelectedSort }) => {
 
     const [dropdownSelectedItem, setDropdownSelectedItem] = useState();
     const [currentKey, setCurrentKey] = useState();
-
 
     useEffect(() => {
         for (let i = 0; i < status.length; i++) {
@@ -77,17 +77,18 @@ const Task = ({ setSort, setSelectedSort }) => {
         e.preventDefault();
         const y = e.clientY;
         const tasks = [...dragParent.children];
-        const closestTask = tasks.reduce((closest, task) => {
-            const index = task.index;
+        console.log()
+        const closest = tasks.reduce((closest, task) => {
             const box = task.getBoundingClientRect();
+            // const offset = y - box.top;
             const offset = y - box.top - box.height / 2;
             if (offset < 0 && offset > closest.offset) {
-                return {offset: offset, task: index}
+                return {offset: offset, task: task}
             } else {
                 return closest
             }
         }, { offset: Number.NEGATIVE_INFINITY })
-        console.log(closestTask)
+        setClosestTask(closest.task);
     }
 
     return <ul onDragOver={dragOver}>

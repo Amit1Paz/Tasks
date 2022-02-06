@@ -87,7 +87,7 @@ const Tasklist = () => {
             </div>
             <TasksHeadlines />
             <ul className='tasks-wrap'>
-                <Task setSort={setSort} setSelectedSort={setSelectedSort}/>
+                <Task setSelectedSort={setSelectedSort}/>
             </ul>
         </div>
     );
