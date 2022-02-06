@@ -80,7 +80,7 @@ const Tasklist = () => {
                 </ul>
             </div>
             <TasksHeadlines />
-            <ul>
+            <ul className='tasks-wrap'>
                 <Task />
             </ul>
         </div>

@@ -16,6 +16,8 @@
     --lightest-purple: rgb(210, 170, 255);
     /* hover */
     --menu-hover: rgba(255, 255, 255, 0.1);
+    /* scrollbar */
+    --scrollbar: #222222;  
 }
 .home-header-container {
     display: flex;
@@ -79,7 +81,23 @@ input {
 
 /* TasksList */ 
 .tasks-list-container {
-    padding: 3rem 0;
+    margin-top: 3rem;
+}
+.tasks-wrap {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 55vh;
+}
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar);
+    border-radius: 50rem;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-background);
 }
 .sort {
     display: flex;
@@ -107,7 +125,7 @@ input {
     background-color: var(--gray-background);
     border-radius: 0.5rem;
     padding: 0.7rem 1rem;
-    margin: 1rem 0;
+    margin: 1rem 0.2rem 1rem 0;
 }
 .task-ul-container:first-of-type {
     margin-top: 0.5rem;
@@ -129,7 +147,6 @@ input {
 .task-content {
     flex-basis: 30%;
 }
-
 .task-date-time {
     background-color: var(--dark-background);
     color: var(--white);
@@ -177,5 +194,5 @@ input {
     flex-basis: 29.4%;
 }
 .task-headlines li:last-of-type {
-    flex-basis: 5%;
+    flex-basis: 6.5%;
 }
