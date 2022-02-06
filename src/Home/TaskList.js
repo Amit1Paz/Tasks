@@ -1,21 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Task from './Task';
 import TasksHeadlines from './TasksHeadlines';
+import TasksListContext from '../Contexts/TasksListContext';
 
 const Tasklist = () => {
+    const [tasksList, setTasksList] = useContext(TasksListContext);
+    const [order, setOrder] = useState([]);
+    const [sort, setSort] = useState();
+
     const [sortList, setSortList] = useState([
-        {name: 'Newest', selected:false, className: null},
+        {name: 'Custom', selected:false, className: null},
         {name: 'Priority', selected: false, className: null},
         {name: 'Status', selected: false, className: null},
-        {name: 'Date', selected: false, className: null},
-        {name: 'Custom', selected: false , className: null}
+        {name: 'Date', selected: false, className: null}
     ]);
 
     const [selectedSort, setSelectedSort] = useState(sortList[0].name);
 
     const handleSortClick = (e) => {
         setSelectedSort(e.target.innerText);
+        setSort(e.target.innerText.toLowerCase());
     }
+
+    useEffect(() => {
+        if (sort === 'priority') {
+            setOrder(['High', 'Medium', 'Low']);
+        } else if (sort === 'status') {
+            setOrder(['Done', 'Stuck', 'Working on it', 'Not started']);
+        } else if (sort === 'date') {
+            setOrder([2, 1]);
+        } else {
+            return
+        }
+    }, [sort])
+
+    useEffect(() => {
+        if (order.length > 0) {
+            const newTasksList = [...tasksList];
+            if (sort !== 'date') {
+                newTasksList.sort((a, b) => {
+                    if (a[sort] === b[sort]) return 0
+                    return order.indexOf(a[sort]) - order.indexOf(b[sort])
+                })
+            } else if (sort === 'date') {
+                const date = 'dateForSort';
+                newTasksList.sort((a, b) => {
+                    if (a[date] > b[date]) {
+                        return -1
+                    } else if (a[date] < b[date]) {
+                        return 1
+                    } else {
+                        return 0
+                    }
+                })
+            }
+            setTasksList(newTasksList);
+        }
+    }, [order])
+
     useEffect(() => {
         if (selectedSort) {
             const newSortList = [...sortList];
