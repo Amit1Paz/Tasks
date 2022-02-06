@@ -6,6 +6,7 @@ import TasksListContext from '../Contexts/TasksListContext';
 
 const Task = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
+    const [dragTraget, setDragTarget] = useState()
     const status = [
         {status: 'Not Started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
@@ -60,9 +61,27 @@ const Task = () => {
         setTasksList(filteredTasksList);
     }
 
-    return <ul>
+    const dragStart = (e) => {
+        e.target.style.opacity = 0.3;
+        setDragTarget(e.target)
+
+    }
+    const dragEnd = (e) => {
+        e.target.style.opacity = 1;
+    }
+    const dragOver = (e) => {
+        e.preventDefault()
+        const y = e.clientY
+        const arr = [...dragTraget.parentElement.children]
+        arr.map(task => {
+            const taskY = task.getBoundingClientRect().y;
+            console.log(y - taskY)
+        })
+    }
+
+    return <ul onDragOver={dragOver}>
         {tasksList.map(task => {
-            return <ul key={task.index} className='task-ul-container'>
+            return <ul key={task.index} className='task-ul-container' draggable='true' onDragStart={dragStart} onDragEnd={dragEnd}>
                 <li className='task-content'>{task.content}</li>
 
                 <ul className='task-priority' style={{backgroundColor: handleBackgroundColor(task.priority)}}>
