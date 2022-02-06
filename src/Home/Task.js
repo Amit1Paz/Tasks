@@ -64,7 +64,6 @@ const Task = ({ setSort, setSelectedSort }) => {
     const dragStart = (e) => {
         e.target.style.opacity = 0.3;
         setDragTarget(e.target);
-        setSort('custom');
         setSelectedSort('Custom')
     }
     const dragEnd = (e) => {

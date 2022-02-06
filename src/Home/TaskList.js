@@ -17,9 +17,14 @@ const Tasklist = () => {
 
     const [selectedSort, setSelectedSort] = useState(sortList[0].name);
 
+    useEffect(() => {
+        if(tasksList.length === 0) {
+            setSelectedSort(sortList[0].name)
+        }
+    }, [tasksList])
+
     const handleSortClick = (e) => {
         setSelectedSort(e.target.innerText);
-        setSort(e.target.innerText.toLowerCase());
     }
 
     useEffect(() => {
@@ -60,6 +65,7 @@ const Tasklist = () => {
 
     useEffect(() => {
         if (selectedSort) {
+            setSort(selectedSort.toLowerCase());
             const newSortList = [...sortList];
             newSortList.map(item => item.className = null);
             const sort = newSortList.find(item => item.name === selectedSort);
