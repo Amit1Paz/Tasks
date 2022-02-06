@@ -5,7 +5,7 @@ import TasksListContext from '../Contexts/TasksListContext';
 
 const Tasklist = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
-    // const [lowerCaseSelectedSort, setLowerCaseSelectedSort] = useState()
+    const [lowerCaseSelectedSort, setLowerCaseSelectedSort] = useState()
 
     const [sortList, setSortList] = useState([
         {name: 'Newest', selected:false, className: null},
@@ -19,8 +19,20 @@ const Tasklist = () => {
 
     const handleSortClick = (e) => {
         setSelectedSort(e.target.innerText);
-        // setLowerCaseSelectedSort(e.target.innerText.toLowerCase())
+        setLowerCaseSelectedSort(e.target.innerText.toLowerCase())
     }
+
+    
+    useEffect(() => {
+        if (lowerCaseSelectedSort === 'priority') {
+            const order = ['High', 'Medium', 'Low']
+            const newTaskslist = tasksList.sort((a, b) => {
+                if (a[lowerCaseSelectedSort] === b[lowerCaseSelectedSort]) return 0
+                return order.indexOf(a[lowerCaseSelectedSort]) - order.indexOf(b[lowerCaseSelectedSort])
+            })
+            setTasksList(newTaskslist)
+        }
+    }, [lowerCaseSelectedSort])
     
     // useEffect(() => {
     //     const newTasksList = [...tasksList];
