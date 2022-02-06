@@ -4,7 +4,7 @@ import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
 import TasksListContext from '../Contexts/TasksListContext';
 
-const Task = () => {
+const Task = ({ setSort, setSelectedSort }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [dragTraget, setDragTarget] = useState()
     const status = [
@@ -64,7 +64,8 @@ const Task = () => {
     const dragStart = (e) => {
         e.target.style.opacity = 0.3;
         setDragTarget(e.target);
-
+        setSort('custom');
+        setSelectedSort('Custom')
     }
     const dragEnd = (e) => {
         e.target.style.opacity = 1;
