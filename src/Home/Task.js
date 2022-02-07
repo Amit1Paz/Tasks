@@ -4,9 +4,11 @@ import Check from '../imgs/Check.svg';
 import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
 import TasksListContext from '../Contexts/TasksListContext';
+import DoneListContext from '../Contexts/DoneListContext';
 
 const Task = ({ setSelectedSort, isDone }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
+    const [doneList, setDoneList] = useContext(DoneListContext);
     const [dragTraget, setDragTarget] = useState();
     const [dragParent, setDragParent] = useState();
     const [closestTask, setClosestTask] = useState();
@@ -64,9 +66,23 @@ const Task = ({ setSelectedSort, isDone }) => {
         setTasksList(filteredTasksList);
     }
 
-    const handleCheckTaskClick = () => {
+    const handleCheckTaskClick = (index) => {
+        const newTasksList = [...tasksList];
+        const filtered = newTasksList.filter(task => task.index !== index)
+        setTasksList(filtered);
         
+        const task = tasksList.filter(task => task.index === index);
+        const date = new Date;
+        const newDoneList = [...doneList];
+        newDoneList.push({
+            task: task,
+            date: `date`
+        });
+        setDoneList(newDoneList);
     }
+    useEffect(() => {
+        console.log(doneList)
+    }, [doneList])
 
     const dragStart = (e, index) => {
         e.target.style.opacity = 0.5;
