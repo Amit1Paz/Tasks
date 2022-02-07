@@ -4,7 +4,7 @@ import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
 import TasksListContext from '../Contexts/TasksListContext';
 
-const Task = ({ setSelectedSort }) => {
+const Task = ({ setSelectedSort, isDone }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [dragTraget, setDragTarget] = useState();
     const [dragParent, setDragParent] = useState();

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import colors from '../colors';
 import { v4 as uuidv4 } from 'uuid';
 
 const Taskdropdown = ({ priority, status, setDropdownSelectedItem, setCurrentKey, id, handleBackgroundColor }) => {
@@ -24,14 +23,6 @@ const Taskdropdown = ({ priority, status, setDropdownSelectedItem, setCurrentKey
         const slicedCurrentDropdownClass = currentDropdownClass.slice(5);
         setSelectedDropdown(slicedCurrentDropdownClass);
     }
-
-    // useEffect(() => {
-    //     if (open) {
-    //         setZIndex(1)
-    //     } else {
-    //         setZIndex(0)
-    //     }
-    // }, [open])
     
     useEffect(() => {
         if (selectedDropdown === 'priority') {

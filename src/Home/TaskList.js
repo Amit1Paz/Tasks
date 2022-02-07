@@ -7,6 +7,7 @@ const Tasklist = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [order, setOrder] = useState([]);
     const [sort, setSort] = useState();
+    const [isDone, setIsDone] = useState();
 
     const [sortList, setSortList] = useState([
         {name: 'Custom', selected:false, className: null},
@@ -19,8 +20,11 @@ const Tasklist = () => {
 
     useEffect(() => {
         if(tasksList.length === 0) {
-            setSelectedSort(sortList[0].name)
+            setSelectedSort(sortList[0].name);
         }
+        const statusArray = tasksList.map(task => task.status);
+        const arr = statusArray.filter(status => status === 'Done');
+        arr.length > 0 ? setIsDone(true) : setIsDone(false);
     }, [tasksList])
 
     const handleSortClick = (e) => {
@@ -87,7 +91,7 @@ const Tasklist = () => {
             </div>
             <TasksHeadlines />
             <ul className='tasks-wrap'>
-                <Task setSelectedSort={setSelectedSort}/>
+                <Task setSelectedSort={setSelectedSort} isDone={isDone}/>
             </ul>
         </div>
     );

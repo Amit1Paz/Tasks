@@ -83,6 +83,12 @@ input {
 .tasks-list-container {
     margin-top: 3rem;
 }
+.mark-done-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.3rem;
+    background: var(--light-purple);
+}
 .tasks-wrap {
     position: relative;
     overflow-y: scroll;
