@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Delete from '../imgs/Delete.svg';
+import Check from '../imgs/Check.svg';
 import colors from '../colors';
 import TaskDropdown from './TaskDropdown';
 import TasksListContext from '../Contexts/TasksListContext';
@@ -63,6 +64,10 @@ const Task = ({ setSelectedSort, isDone }) => {
         setTasksList(filteredTasksList);
     }
 
+    const handleCheckTaskClick = () => {
+        
+    }
+
     const dragStart = (e, index) => {
         e.target.style.opacity = 0.5;
         setDragParent(e.target.parentElement);
@@ -114,10 +119,16 @@ const Task = ({ setSelectedSort, isDone }) => {
                     <li>{task.date}</li>
                     <li className='task-time'>{task.time}</li>
                 </ul>
-                
-                <li className='task-delete' onClick={() => handleDeleteTaskClick(task.index)}>
-                    <img src={Delete} alt='Delete'/>
-                </li>
+                {task.status !== 'Done' && 
+                    <li className='task-delete' onClick={() => handleDeleteTaskClick(task.index)}>
+                        <img src={Delete} alt='Delete'/>
+                    </li>
+                }
+                {task.status === 'Done' &&
+                    <li className='task-check' onClick={() => handleCheckTaskClick(task.index)}>
+                        <img src={Check} alt='V'/>
+                    </li>
+                }
             </ul>
         })}
     </ul>
