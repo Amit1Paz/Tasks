@@ -1,5 +1,5 @@
 import './css/App.css';
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import Menu from "./Menu";
 import Home from './Home/Home';
 import Settings from './Settings';
@@ -11,7 +11,7 @@ function App() {
   const [name, setName] = useState('Amit');
   const [activeTab, setActiveTab] = useState('Home');
   const [tasksList, setTasksList] = useState([]);
-  const [doneList, setDoneList] = useState([]);
+  const [doneList, setDoneList] = useState([]); 
 
   return (
     <div className='container'>

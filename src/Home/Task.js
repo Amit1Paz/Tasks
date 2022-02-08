@@ -28,6 +28,12 @@ const Task = ({ setSelectedSort, isDone }) => {
     const [dropdownSelectedItem, setDropdownSelectedItem] = useState();
     const [currentKey, setCurrentKey] = useState();
 
+    const filterTasksList = (index) => {
+        const newTasksList = [...tasksList];
+        const filtered = newTasksList.filter(task => task.index !== index);
+        setTasksList(filtered)
+    }
+
     useEffect(() => {
         for (let i = 0; i < status.length; i++) {
             if (dropdownSelectedItem === status[i].status) {
@@ -61,28 +67,31 @@ const Task = ({ setSelectedSort, isDone }) => {
     }
 
     const handleDeleteTaskClick = (taskIndex) => {
-        const newTasksList = [...tasksList];
-        const filteredTasksList = newTasksList.filter(task => task.index !== taskIndex);
-        setTasksList(filteredTasksList);
+        filterTasksList(taskIndex);
     }
 
     const handleCheckTaskClick = (index) => {
-        const newTasksList = [...tasksList];
-        const filtered = newTasksList.filter(task => task.index !== index)
-        setTasksList(filtered);
-        
-        const task = tasksList.filter(task => task.index === index);
-        const date = new Date;
+        filterTasksList(index); 
+        const task = tasksList.find(task => task.index === index);
         const newDoneList = [...doneList];
         newDoneList.push({
             task: task,
-            date: `date`
+            date: getDate()
         });
         setDoneList(newDoneList);
     }
     useEffect(() => {
         console.log(doneList)
     }, [doneList])
+
+    const getDate = () => {
+        const d = new Date();
+        const day = `0${d.getDate()}`.slice(-2);
+        const month = `0${d.getMonth() + 1}`.slice(-2);
+        const year = `0${d.getFullYear()}`.slice(-2);
+        const date = `${day}.${month}.${year}`;
+        return date;
+    }
 
     const dragStart = (e, index) => {
         e.target.style.opacity = 0.5;
