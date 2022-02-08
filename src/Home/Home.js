@@ -1,3 +1,4 @@
+import '../css/home.css'
 import HomeHeader from './HomeHeader';
 import TaskList from './TaskList'
 import React from 'react';

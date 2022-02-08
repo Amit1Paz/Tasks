@@ -2,6 +2,7 @@ import './css/App.css';
 import { useState, createContext, useEffect } from 'react';
 import Menu from "./Menu";
 import Home from './Home/Home';
+import Achievements from './Achievements/Achievements';
 import Settings from './Settings';
 import TopBar from './TopBar';
 import TasksListContext from './Contexts/TasksListContext';
@@ -20,6 +21,7 @@ function App() {
         <TopBar activeTab={activeTab} />
         <DoneListContext.Provider value={[doneList, setDoneList]}>
           <div className='content-container'>
+            {activeTab === 'Achievements' && <Achievements />}
             {activeTab === 'Settings' && <Settings />}
             <TasksListContext.Provider value={[tasksList, setTasksList]}>
               {activeTab === 'Home' && <Home name={name} />}
