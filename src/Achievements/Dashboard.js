@@ -20,26 +20,32 @@ const Dashboard = () => {
                 setWeeklyGoal(weeklyGoal -= 1);
             }
         } else {
-            setWeeklyGoal(weeklyGoal += 1);
+            if (weeklyGoal < 999) {
+                setWeeklyGoal(weeklyGoal += 1);
+            }
         }
     }
 
     return (
         <div className='dashboard'>
             <h2>Dashboard</h2>
-            <div className='dashboard-category'>
-                <h3>Total task completed</h3>
-                <p>{doneList.length}</p>
-            </div>
-            <div className='dashboard-category'>
-                <h3>Tasks completed this week</h3>
-                <p>{weeklyTasks.length}</p>
-            </div>
-            <div className='dashboard-category'>
-                <h3>Weekly Goal</h3>
-                <button onClick={handleChangeGoal}>-</button>
-                <p>{weeklyGoal}</p>
-                <button onClick={handleChangeGoal}>+</button>
+            <div className='dashboard-categories'>
+                <div className='dashboard-category'>
+                    <h3>Total task completed</h3>
+                    <p>{doneList.length}</p>
+                </div>
+                <div className='dashboard-category'>
+                    <h3>Tasks completed this week</h3>
+                    <p>{weeklyTasks.length}</p>
+                </div>
+                <div className='dashboard-category'>
+                    <h3>Weekly Goal</h3>
+                    <div className='weekly-goal'>
+                        <button onClick={handleChangeGoal}>-</button>
+                        <p>{weeklyGoal}</p>
+                        <button onClick={handleChangeGoal}>+</button>
+                    </div>
+                </div>
             </div>
             <Weeklygraph />
         </div>

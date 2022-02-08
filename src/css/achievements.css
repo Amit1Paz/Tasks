@@ -6,3 +6,31 @@
 .dashboard h2 {
     color: white;
 }
+.dashboard-categories {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+.dashboard-category {
+    flex-basis: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.dashboard-category p {
+    font-size: 3rem;
+    color: white;
+    font-weight: 600;
+}
+.weekly-goal {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.weekly-goal button {
+    color: var(--light-gray);
+    width: 1.5rem;
+    height: 1.5rem;
+}
