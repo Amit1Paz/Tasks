@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Weeklygraph from './WeeklyGraph';
 import DoneListContext from '../Contexts/DoneListContext';
-
+import WeeklyGoalContext from '../Contexts/WeeklyGoalContext'
 const Dashboard = () => {
     const [doneList, setDoneList] = useContext(DoneListContext);
     const [weeklyTasks, setWeeklyTasks] = useState([]);
-    let [weeklyGoal, setWeeklyGoal] = useState(1);
+    const [textColor, setTextColor] = useState('white');
+    let [weeklyGoal, setWeeklyGoal] = useContext(WeeklyGoalContext);
 
     useEffect(() => {
         const newDoneList = [...doneList];
@@ -26,6 +27,14 @@ const Dashboard = () => {
         }
     }
 
+    useEffect(() => {
+        if (weeklyTasks.length >= weeklyGoal) {
+            setTextColor('rgb(180, 115, 255)');
+        } else {
+            setTextColor('white');
+        }
+    }, [weeklyGoal, weeklyTasks])
+
     return (
         <div className='dashboard'>
             <h2>Dashboard</h2>
@@ -36,7 +45,7 @@ const Dashboard = () => {
                 </div>
                 <div className='dashboard-category'>
                     <h3>Tasks completed this week</h3>
-                    <p>{weeklyTasks.length}</p>
+                    <p style={{color: textColor}}>{weeklyTasks.length}</p>
                 </div>
                 <div className='dashboard-category'>
                     <h3>Weekly Goal</h3>
