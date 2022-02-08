@@ -5,13 +5,24 @@ import DoneListContext from '../Contexts/DoneListContext';
 const Dashboard = () => {
     const [doneList, setDoneList] = useContext(DoneListContext);
     const [weeklyTasks, setWeeklyTasks] = useState([]);
+    let [weeklyGoal, setWeeklyGoal] = useState(1);
 
     useEffect(() => {
         const newDoneList = [...doneList];
         const filtered = newDoneList.filter(task => task.dateInMs <= Date.now() && task.dateInMs > Date.now() - 604800000);
-        setWeeklyTasks(filtered)
-        weeklyTasks.map(task => console.log(task.dateInMs))
+        setWeeklyTasks(filtered);
     }, [doneList])
+
+    const handleChangeGoal = (e) => {
+        const operator = e.target.innerText;
+        if (operator === '-') {
+            if (weeklyGoal > 0) {
+                setWeeklyGoal(weeklyGoal -= 1);
+            }
+        } else {
+            setWeeklyGoal(weeklyGoal += 1);
+        }
+    }
 
     return (
         <div className='dashboard'>
@@ -26,7 +37,9 @@ const Dashboard = () => {
             </div>
             <div className='dashboard-category'>
                 <h3>Weekly Goal</h3>
-                <p>{}</p>
+                <button onClick={handleChangeGoal}>-</button>
+                <p>{weeklyGoal}</p>
+                <button onClick={handleChangeGoal}>+</button>
             </div>
             <Weeklygraph />
         </div>
