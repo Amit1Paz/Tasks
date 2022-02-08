@@ -76,13 +76,11 @@ const Task = ({ setSelectedSort, isDone }) => {
         const newDoneList = [...doneList];
         newDoneList.push({
             task: task,
-            date: getDate()
+            date: getDate(),
+            dateInMs: Date.now()
         });
         setDoneList(newDoneList);
     }
-    useEffect(() => {
-        console.log(doneList)
-    }, [doneList])
 
     const getDate = () => {
         const d = new Date();
@@ -92,7 +90,6 @@ const Task = ({ setSelectedSort, isDone }) => {
         const date = `${day}.${month}.${year}`;
         return date;
     }
-
     const dragStart = (e, index) => {
         e.target.style.opacity = 0.5;
         setDragParent(e.target.parentElement);
