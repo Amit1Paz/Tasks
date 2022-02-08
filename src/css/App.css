@@ -41,7 +41,7 @@ button {
     padding: 0.9rem 0.5rem;
     background-color: var(--gray-background);
     color: var(--light-gray);
-    height: 100vh;
+    min-height: 100vh;
     width: 13rem;
 }
 .logo {
@@ -127,7 +127,15 @@ h1 {
     outline: 2px solid var(--light-purple);
 }
 
+
+/* general */
 /* content-container */
 .content-container {
-    padding: 2.5rem 5rem;
+    padding: 2.5rem 5rem 0 5rem;
+}
+/* flex-center */
+.flex-center-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
