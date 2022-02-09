@@ -8,22 +8,18 @@ const WeeklyChart = () => {
     for (let i = 0; i < 10; i++) {
         const d = new Date();
         d.setDate(d.getDate()-i);
-        let day = d.getDate();
-        if (day === 1) {
-            day = `${d.getDate()}.${d.getMonth() + 1}`
-        }
+        const day = `${d.getDate()}.${d.getMonth() + 1}`
         labels.unshift(day)
     }
 
     return (
-        <div>
+        <div className='weekly-chart-container'>
             <Bar 
             height={100}
-            width={400}
+            width={300}
             data={{
                 labels: labels,
                 datasets: [{
-                    label: '',
                     data: [12, 19, 0, 5, 2, 3],
                     backgroundColor: 'rgb(99, 99, 99)',
                     borderColor: 'rgb(204, 204, 204)',
@@ -31,7 +27,12 @@ const WeeklyChart = () => {
                 }],
             }}
             options={{
-                responsive: true
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }}
             />
         </div>
