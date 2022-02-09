@@ -48,7 +48,7 @@ const Dashboard = () => {
                     <p style={{color: textColor}}>{weeklyTasks.length}</p>
                 </div>
                 <div className='dashboard-category'>
-                    <h3>Weekly Goal</h3>
+                    <h3>Weekly goal</h3>
                     <div className='weekly-goal'>
                         <button onClick={handleChangeGoal}>-</button>
                         <p>{weeklyGoal}</p>
