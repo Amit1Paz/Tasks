@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Weeklygraph from './WeeklyGraph';
 import DoneListContext from '../Contexts/DoneListContext';
 import WeeklyGoalContext from '../Contexts/WeeklyGoalContext'
+import WeeklyChart from './WeeklyChart';
+
 const Dashboard = () => {
     const [doneList, setDoneList] = useContext(DoneListContext);
     const [weeklyTasks, setWeeklyTasks] = useState([]);
@@ -56,7 +57,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <Weeklygraph />
+            <WeeklyChart />
         </div>
     );
 }
