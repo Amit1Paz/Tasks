@@ -1,10 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'
 import DoneListContext from '../Contexts/DoneListContext';
 
 const WeeklyChart = () => {
     const [doneList, setDoneList] = useContext(DoneListContext);
+    const [groupedTasks, setGroupedTasks] = useState({});
+    const [data, setData] = useState();
 
     const labels = [];
 
@@ -18,12 +20,20 @@ const WeeklyChart = () => {
     
 
     useEffect(() => {
-        const sort = [...doneList]
-        sort.map(task => {
+        setGroupedTasks(doneList.reduce((groupedTasks, task) => {
             const d = new Date(task.dateInMs);
-            console.log(d.getDay())
-        })
+            const date = `${d.getDate()}.${d.getMonth() + 1}`
+            if (groupedTasks[date] == null) {
+                groupedTasks[date] = [];
+            }
+            groupedTasks[date].push(task);
+            return groupedTasks;
+        }, {}))
     }, [doneList])
+    
+    useEffect(() => {
+        // set data by dates
+    }, [groupedTasks])
 
     return (
         <div className='weekly-chart-container'>
