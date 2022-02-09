@@ -21,9 +21,6 @@ const Tasklist = () => {
         if(tasksList.length === 0) {
             setSelectedSort(sortList[0].name);
         }
-        // const statusArray = tasksList.map(task => task.status);
-        // const arr = statusArray.filter(status => status === 'Done');
-        // arr.length > 0 ? setIsDone(true) : setIsDone(false);
     }, [tasksList])
 
     const handleSortClick = (e) => {
