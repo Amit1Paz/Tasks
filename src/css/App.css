@@ -146,4 +146,10 @@ h1 {
     .menu {
         width: 3rem;
     }
+    .menu h1, .menu p {
+        display: none;
+    }
+    .menu-tab {
+        padding: 0.5rem
+    }
 }
