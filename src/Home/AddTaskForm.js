@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import TasksListContext from '../Contexts/TasksListContext';
 
@@ -7,13 +7,14 @@ const Addtaskform = ({ setShowAddForm }) => {
     const taskRef = useRef();
     const dateRef = useRef();
     const timeRef = useRef();
+    const formRef = useRef();
 
     const handleFormSubmit = (e) => {
-        e.preventDefault()
-        setShowAddForm(false)
-        const day = dateRef.current.value.slice(8)
-        const month = dateRef.current.value.slice(5,7)
-        const year = dateRef.current.value.slice(2,4)
+        e.preventDefault();
+        setShowAddForm(false);
+        const day = dateRef.current.value.slice(8);
+        const month = dateRef.current.value.slice(5,7);
+        const year = dateRef.current.value.slice(2,4);
         setTasksList([{
             index: `${uuidv4()}`,
             priority: 'Low',
@@ -26,8 +27,20 @@ const Addtaskform = ({ setShowAddForm }) => {
         ])
     }
 
+    useEffect(() => {
+        const handleCloseForm = (e) => {
+            if (!formRef.current.contains(e.target)) {
+                setShowAddForm(false);
+            }
+        }
+        document.addEventListener('mousedown', handleCloseForm);
+        return () => {
+            document.removeEventListener('mousedown', handleCloseForm);
+        }
+    }, [])
+
     return (
-        <form className='add-task-form' onSubmit={handleFormSubmit}>
+        <form className='add-task-form' onSubmit={handleFormSubmit} ref={formRef}>
             <label htmlFor='task-input'>Task</label>
             <input ref={taskRef} id='task-input' type='text' placeholder='Insert task here...' required/>
             <label htmlFor='task-schedule-date'>Schedule date</label>
