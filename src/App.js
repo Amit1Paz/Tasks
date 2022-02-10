@@ -1,5 +1,5 @@
 import './css/App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Menu from "./Menu";
 import Home from './Home/Home';
 import Achievements from './Achievements/Achievements';
@@ -12,9 +12,29 @@ import WeeklyGoalContext from './Contexts/WeeklyGoalContext';
 function App() {
   const [name, setName] = useState('Amit');
   const [activeTab, setActiveTab] = useState('Home');
-  const [tasksList, setTasksList] = useState([]);
+
+  const [tasksList, setTasksList] = useState(() => {
+    const localData = localStorage.getItem('tasks-app-tasksList');
+    return localData ? JSON.parse(localData) : [];
+  });
+  
   const [doneList, setDoneList] = useState([]); 
   const [weeklyGoal, setWeeklyGoal] = useState(1);
+
+  useEffect(() => {
+    localStorage.setItem('tasks-app-activeTab', JSON.stringify(activeTab));
+  }, [activeTab])
+  useEffect(() => {
+    localStorage.setItem('tasks-app-tasksList', JSON.stringify(tasksList));
+  }, [tasksList])
+  useEffect(() => {
+    localStorage.setItem('tasks-app-doneList', JSON.stringify(doneList));
+  }, [doneList])
+  useEffect(() => {
+    localStorage.setItem('tasks-app-weeklyGoal', JSON.stringify(weeklyGoal));
+  }, [weeklyGoal])
+
+
 
   return (
     <div className='container'>
