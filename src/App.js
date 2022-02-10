@@ -1,5 +1,4 @@
 import './css/App.css';
-import './css/responsive.css'
 import { useState } from 'react';
 import Menu from "./Menu";
 import Home from './Home/Home';

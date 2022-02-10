@@ -19,6 +19,9 @@
     /* scrollbar */
     --scrollbar: #222222;  
 }
+.home-container {
+    width: 90%;
+}
 .home-header-container {
     display: flex;
     justify-content: space-between;
@@ -93,7 +96,7 @@ input {
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 55vh;
+    height: 54vh;
 }
 ::-webkit-scrollbar {
     width: 0.5rem;
@@ -128,6 +131,7 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     background-color: var(--gray-background);
     border-radius: 0.5rem;
     padding: 0.7rem 1rem;
@@ -136,7 +140,13 @@ input {
 .task-ul-container:first-of-type {
     margin-top: 0.5rem;
 }
-.task-conten, .task-priority, .task-status, .task-date-time, .task-delete, .task-check {
+.task-categories {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 65%;
+    gap: 0.5rem;
+}
+.task-priority, .task-status, .task-date-time, .task-delete, .task-check {
     position: relative;
     height: 3rem;
     display: flex;
@@ -146,12 +156,23 @@ input {
     text-align: center;
     line-height: 1.2rem;
     padding: 0.5rem;
-    flex-basis: 15%;
     color: white;
-    margin: 0 0.2rem;
+    flex-basis: 25%;
 }
 .task-content {
-    flex-basis: 30%;
+    padding: 0.7rem 0;
+    flex-basis: 35%;
+    min-height: 3rem;
+    max-height: 3.1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.task-content:hover {
+    padding: 0;
+    overflow-y: visible;
+    max-height: none;
+    white-space: initial;
 }
 .task-date-time {
     background-color: var(--dark-background);
@@ -193,16 +214,113 @@ input {
     justify-content: space-between;
     padding: 0 1rem;
     margin-top: 1rem;
+    text-align: center;
 }
-.task-headlines li {
-    display: flex;
-    justify-content: center;
-    flex-basis: 15%;
-    margin: 0 0.2rem;
+.task-headlines li { 
+    flex-basis: 20.5%;
 }
 .task-headlines li:first-of-type {
-    flex-basis: 29.4%;
+    flex-basis: 35%;
 }
 .task-headlines li:last-of-type {
-    flex-basis: 6.5%;
+    flex-basis: 7.5%;
+}
+
+/* responsive */
+@media (max-width: 1020px) {
+    .task-headlines li { 
+        flex-basis: 19.5%;
+    }
+    .task-headlines li:last-of-type {
+        flex-basis: 8.5%;
+    }
+}
+@media (max-width: 870px) {
+    .add-task-form {
+        right: 7rem;
+        border: 1px solid var(--light-gray);
+    }
+    .task-headlines {
+        display: none;
+    }
+    .tasks-list-container h3 {
+        display: none;
+    }
+    .task-ul-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    .task-ul-container:first-of-type {
+        margin-top: 1.5rem;
+    }
+    .task-content {
+        position: relative;
+        padding: 0;
+        width: 100%;
+    }
+    .task-content::before {
+        content: 'Task:';
+        display: block;
+        font-weight: 500;
+        color: var(--white);
+    }
+    .task-categories {
+        width: 100%;
+    }
+}
+@media (max-width: 650px) {
+    .add-task-form {
+        right: 5rem;
+        border: 1px solid var(--light-gray);
+    }
+}
+@media (max-width: 610px) {
+    .tasks-wrap {
+        padding-left: 0.5rem;
+    }
+    .task-content {
+        padding: 0;
+        flex-basis: 35%;
+        min-height: none;
+        max-height: none;
+        white-space: initial;
+    }
+}
+@media (max-width: 500px) {
+    .task-priority, .task-status, .task-date-time, .task-delete, .task-check {
+        height: 2.5rem;
+        padding: 1.5rem 0.5rem;
+    }
+}
+@media (max-width: 450px) {
+    .task-categories {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .task-priority {
+        grid-column: 1 / 3;
+    }
+    .task-status {
+        grid-column: 3 / 5;
+    }
+    .task-date-time {
+        grid-column: 1 / 4;
+    }
+    .task-delete, .task-check {
+        grid-column: 4;
+    }
+    .add-task-form {
+        top: 10rem;
+        right: 1.1rem;
+        width: 18rem;
+    }
+}
+@media (max-width: 366px) {
+    .add-task-form {
+        top: 10rem;
+        right: 1.1rem;
+        width: 15rem;
+    }
 }

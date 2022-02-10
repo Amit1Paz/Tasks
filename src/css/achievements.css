@@ -1,4 +1,5 @@
 .dashboard {
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,13 +48,8 @@
     height: 10rem;
 }
 
+
 /* responsive */
-/* achievements */
-@media (max-width: 850px) {
-    .content-container {
-        padding: 2.5rem 2.5rem 0 2.5rem;
-    }
-}
 @media (max-width: 760px) {
     .weekly-chart-container {
         width: 26rem;
@@ -88,8 +84,8 @@
     }
 }
 @media (max-width: 400px) {
-    .content-container {
-        padding: 2.5rem 1rem 0 1rem;
+    .dashboard {
+        width: 80%;
     }
     .dashboard-categories {
         flex-direction: column;
