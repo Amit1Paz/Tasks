@@ -7,7 +7,7 @@ import SortListContext from '../Contexts/SortListContext';
 const Home = ({ name }) => {
     const [selectedSort, setSelectedSort] = useState();
     return (
-        <div>
+        <div className='home-container'>
             <SortListContext.Provider value={[selectedSort, setSelectedSort]}>
                 <HomeHeader name={name} />
                 <TaskList />

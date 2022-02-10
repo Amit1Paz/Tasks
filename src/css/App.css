@@ -131,11 +131,27 @@ h1 {
 /* general */
 /* content-container */
 .content-container {
-    padding: 2.5rem 5rem 0 5rem;
+    display: flex;
+    padding-top: 2.5rem;
+    justify-content: center;
 }
 /* flex-center */
 .flex-center-between {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+
+/* responsive */
+@media (max-width: 600px) {
+    .menu {
+        width: 3rem;
+    }
+    .menu h1, .menu p {
+        display: none;
+    }
+    .menu-tab {
+        padding: 0.5rem
+    }
 }

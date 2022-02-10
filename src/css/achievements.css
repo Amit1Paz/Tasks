@@ -1,4 +1,5 @@
 .dashboard {
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,4 +46,48 @@
 .weekly-chart-container {
     width: 30rem;
     height: 10rem;
+}
+
+
+/* responsive */
+@media (max-width: 760px) {
+    .weekly-chart-container {
+        width: 26rem;
+        height: 8rem;
+    }
+}
+@media (max-width: 700px) {
+    .weekly-chart-container {
+        width: 18rem;
+        height: 6rem;
+    }
+}
+@media (max-width: 500px) {
+    .dashboard-categories h3 {
+        font-size: 0.8rem;
+    }
+    .dashboard-categories p {
+        font-size: 2.5rem;
+    }
+}
+@media (max-width: 450px) {
+    .weekly-chart-container {
+        width: 15rem;
+        height: 5rem;
+    }
+    .weekly-goal {
+        gap: 0;
+    }
+    .dashboard h2 {
+        display: flex;
+        justify-content: center;
+    }
+}
+@media (max-width: 400px) {
+    .dashboard {
+        width: 80%;
+    }
+    .dashboard-categories {
+        flex-direction: column;
+    }
 }

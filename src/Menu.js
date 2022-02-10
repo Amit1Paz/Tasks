@@ -1,9 +1,9 @@
-import Home from './imgs/Home.svg'
-import Goals from './imgs/Goals.svg'
-import Search from './imgs/Search.svg'
-import Settings from './imgs/Settings.svg'
-import Tasks from './imgs/Tasks.svg'
-import { useState, useEffect } from 'react'
+import Home from './imgs/Home.svg';
+import Goals from './imgs/Goals.svg';
+import Search from './imgs/Search.svg';
+import Settings from './imgs/Settings.svg';
+import Tasks from './imgs/Tasks.svg';
+import { useState, useEffect } from 'react';
 
 const Menu = ({ setActiveTab, activeTab }) => {
     let className = {
@@ -18,8 +18,8 @@ const Menu = ({ setActiveTab, activeTab }) => {
         {name: 'Settings', icon: Settings, style: className.notSelected}
     ])
 
-    const handleClick = (e) => {
-        setActiveTab(e.target.innerText);
+    const handleClick = (name) => {
+        setActiveTab(name);
     }
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const Menu = ({ setActiveTab, activeTab }) => {
     }, [activeTab])
 
     const handleLogoClick = () => {
-        setActiveTab('Home');
+        setActiveTab(menuTabs[0].name);
     }
 
     return (
@@ -48,9 +48,11 @@ const Menu = ({ setActiveTab, activeTab }) => {
                         <li
                         className={tab.style}
                         key={tab.name}
-                        onClick={handleClick}>
+                        onClick={() => handleClick(tab.name)}>
                             <img src={tab.icon} alt={`${tab.name} icon`}/>
-                            {tab.name}
+                            <p>
+                                {tab.name}
+                            </p>
                         </li>
                     ) 
                 })}
