@@ -41,11 +41,11 @@ const Dashboard = () => {
             <h2>Dashboard</h2>
             <div className='dashboard-categories'>
                 <div className='dashboard-category'>
-                    <h3>Total task completed</h3>
+                    <h3>Total tasks completed</h3>
                     <p>{doneList.length}</p>
                 </div>
                 <div className='dashboard-category'>
-                    <h3>Tasks completed this week</h3>
+                    <h3>Completed this week</h3>
                     <p style={{color: textColor}}>{weeklyTasks.length}</p>
                 </div>
                 <div className='dashboard-category'>

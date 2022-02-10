@@ -9,9 +9,6 @@ import DoneListContext from '../Contexts/DoneListContext';
 const Task = ({ setSelectedSort, isDone }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [doneList, setDoneList] = useContext(DoneListContext);
-    const [dragTraget, setDragTarget] = useState();
-    const [dragParent, setDragParent] = useState();
-    const [closestTask, setClosestTask] = useState();
 
     const status = [
         {status: 'Not started', background: colors.status.notStarted},
@@ -90,37 +87,10 @@ const Task = ({ setSelectedSort, isDone }) => {
         const date = `${day}.${month}.${year}`;
         return date;
     }
-    const dragStart = (e, index) => {
-        e.target.style.opacity = 0.5;
-        setDragParent(e.target.parentElement);
-        const target = tasksList.find(task => task.index === index);
-        setDragTarget(target);
-        setSelectedSort('Custom');
-    }
-    const dragEnd = (e) => {
-        e.target.style.opacity = 1;
-    }
-    const dragOver = (e) => {
-        e.preventDefault();
-        const y = e.clientY;
-        const tasks = [...dragParent.children];
-        console.log()
-        const closest = tasks.reduce((closest, task) => {
-            const box = task.getBoundingClientRect();
-            // const offset = y - box.top;
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return {offset: offset, task: task}
-            } else {
-                return closest
-            }
-        }, { offset: Number.NEGATIVE_INFINITY })
-        setClosestTask(closest.task);
-    }
 
-    return <ul onDragOver={dragOver}>
+    return <ul>
         {tasksList.map(task => {
-            return <ul key={task.index} className='task-ul-container' draggable='true' onDragStart={(e) => dragStart(e, task.index)} onDragEnd={dragEnd}>
+            return <ul key={task.index} className='task-ul-container'>
                 <li className='task-content'>{task.content}</li>
 
                 <ul className='task-priority' style={{backgroundColor: handleBackgroundColor(task.priority)}}>
