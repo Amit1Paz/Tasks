@@ -2,9 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import Task from './Task';
 import TasksHeadlines from './TasksHeadlines';
 import TasksListContext from '../Contexts/TasksListContext';
+import SortListContext from '../Contexts/SortListContext';
 
 const Tasklist = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
+    const [selectedSort, setSelectedSort] = useContext(SortListContext);
     const [order, setOrder] = useState([]);
     const [sort, setSort] = useState();
 
@@ -14,8 +16,6 @@ const Tasklist = () => {
         {name: 'Status', selected: false, className: null},
         {name: 'Date', selected: false, className: null}
     ]);
-
-    const [selectedSort, setSelectedSort] = useState(sortList[0].name);
 
     useEffect(() => {
         if(tasksList.length === 0) {

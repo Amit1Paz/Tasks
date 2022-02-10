@@ -1,9 +1,12 @@
 import React, { useRef, useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import TasksListContext from '../Contexts/TasksListContext';
+import SortListContext from '../Contexts/SortListContext';
 
-const Addtaskform = ({ setShowAddForm }) => {
+const Addtaskform = ({ setShowAddForm, btnRef }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
+    const [selectedSort, setSelectedSort] = useContext(SortListContext);
+
     const taskRef = useRef();
     const dateRef = useRef();
     const timeRef = useRef();
@@ -25,12 +28,15 @@ const Addtaskform = ({ setShowAddForm }) => {
             time: timeRef.current.value
             }, ...tasksList
         ])
+        setSelectedSort('Custom')
     }
 
     useEffect(() => {
         const handleCloseForm = (e) => {
             if (!formRef.current.contains(e.target)) {
-                setShowAddForm(false);
+                if (!btnRef.current.contains(e.target)) {
+                    setShowAddForm(false);
+                }
             }
         }
         document.addEventListener('mousedown', handleCloseForm);

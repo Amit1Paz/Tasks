@@ -1,13 +1,17 @@
 import '../css/home.css'
 import HomeHeader from './HomeHeader';
 import TaskList from './TaskList'
-import React from 'react';
+import React, { useState } from 'react';
+import SortListContext from '../Contexts/SortListContext';
 
 const Home = ({ name }) => {
+    const [selectedSort, setSelectedSort] = useState();
     return (
         <div>
-            <HomeHeader name={name} />
-            <TaskList />
+            <SortListContext.Provider value={[selectedSort, setSelectedSort]}>
+                <HomeHeader name={name} />
+                <TaskList />
+            </SortListContext.Provider>
         </div>
     );
 }
