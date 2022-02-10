@@ -18,8 +18,8 @@ const Menu = ({ setActiveTab, activeTab }) => {
         {name: 'Settings', icon: Settings, style: className.notSelected}
     ])
 
-    const handleClick = (e) => {
-        setActiveTab(e.target.innerText);
+    const handleClick = (name) => {
+        setActiveTab(name);
     }
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const Menu = ({ setActiveTab, activeTab }) => {
                         <li
                         className={tab.style}
                         key={tab.name}
-                        onClick={handleClick}>
+                        onClick={() => handleClick(tab.name)}>
                             <img src={tab.icon} alt={`${tab.name} icon`}/>
                             {tab.name}
                         </li>

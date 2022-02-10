@@ -46,3 +46,30 @@
     width: 30rem;
     height: 10rem;
 }
+
+/* responsive */
+/* responsive */
+/* achievements */
+@media (max-width: 850px) {
+    .content-container {
+        padding: 2.5rem 2.5rem 0 2.5rem;
+    }
+}
+@media (max-width: 760px) {
+    .weekly-chart-container {
+        width: 26rem;
+        height: 8rem;
+    }
+}
+@media (max-width: 700px) {
+    .weekly-chart-container {
+        width: 18rem;
+        height: 6rem;
+    }
+}
+@media (max-width: 600px) {
+    .weekly-chart-container {
+        width: 18rem;
+        height: 6rem;
+    }
+}
