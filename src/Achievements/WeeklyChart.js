@@ -6,7 +6,7 @@ import DoneListContext from '../Contexts/DoneListContext';
 const WeeklyChart = () => {
     const [doneList, setDoneList] = useContext(DoneListContext);
     const [groupedTasks, setGroupedTasks] = useState({});
-    const [data, setData] = useState();
+    const [chartData, setChartData] = useState([]);
 
     const labels = [];
 
@@ -32,8 +32,16 @@ const WeeklyChart = () => {
     }, [doneList])
     
     useEffect(() => {
-        // set data by dates
+        labels.map(date => {
+            if (groupedTasks[date]) {
+                chartData.push(groupedTasks[date].length);
+            } else {
+                chartData.push(null);
+            }
+        })
+        setChartData(chartData.slice(-7));
     }, [groupedTasks])
+    
 
     return (
         <div className='weekly-chart-container'>
@@ -43,7 +51,7 @@ const WeeklyChart = () => {
             data={{
                 labels: labels,
                 datasets: [{
-                    data: [],
+                    data: chartData,
                     backgroundColor: 'rgb(99, 99, 99)',
                     borderColor: 'rgb(204, 204, 204)',
                     borderWidth: 1,
