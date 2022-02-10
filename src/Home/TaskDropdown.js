@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const Taskdropdown = ({ priority, status, setDropdownSelectedItem, setCurrentKey, id, handleBackgroundColor }) => {
@@ -8,6 +8,8 @@ const Taskdropdown = ({ priority, status, setDropdownSelectedItem, setCurrentKey
     const [returnedDropdownList, setReturnedDropdownList] = useState([]);
     const [selectedDropdown, setSelectedDropdown] = useState();
     const [zIndex, setZIndex] = useState(0)
+
+    const dropdownRef = useRef();
 
     const handleOpenClick = (e) => {
         setOpen(!open);
@@ -40,10 +42,20 @@ const Taskdropdown = ({ priority, status, setDropdownSelectedItem, setCurrentKey
         setDropdownSelectedItem(e.target.innerText);
         setCurrentKey(id);
     }
-
     
+    useEffect(() => {
+        const closeDropdownHandler = (e) => {
+            if (!dropdownRef.current.contains(e.target)) {
+                setOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', closeDropdownHandler);
+        return () => {
+            document.removeEventListener('mousedown', closeDropdownHandler);
+        }
+    }, [])
 
-    return <ul onClick={handleOpenClick} className='task-dropdown' style={{zIndex: zIndex}}>
+    return <ul onClick={handleOpenClick} className='task-dropdown' style={{zIndex: zIndex}} ref={dropdownRef}>
         {open && returnedDropdownList.map(el => {
             return <li style={{background: handleBackgroundColor(el)}} key={uuidv4()} onClick={handleChooseFromMenu} className='task-dropdown__option'>
                 {el}
