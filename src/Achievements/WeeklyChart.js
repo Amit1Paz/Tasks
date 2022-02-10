@@ -17,8 +17,6 @@ const WeeklyChart = () => {
         labels.unshift(day)
     }
 
-    
-
     useEffect(() => {
         setGroupedTasks(doneList.reduce((groupedTasks, task) => {
             const d = new Date(task.dateInMs);
