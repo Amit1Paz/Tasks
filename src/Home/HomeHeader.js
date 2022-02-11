@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AddTaskForm from './AddTaskForm';
-const Homeheader = ({ name }) => {
+import Edit from '../imgs/Edit.svg'
+
+const Homeheader = ({ name, setName }) => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [btnContent, setBtnContent] = useState('+');
     const [btnRotation, setBtnRotation] = useState('-90deg');
+    const [showEditInput, setShowEditInput] = useState(false);
 
     const btnRef = useRef();
+    const nameInputRef = useRef();
 
     const handleAddTaskClick = (e) => {
         setShowAddForm(!showAddForm);
@@ -21,10 +25,33 @@ const Homeheader = ({ name }) => {
         } 
     }, [showAddForm])
 
+    const handleEditClick = () => {
+        setShowEditInput(!showEditInput)
+    }
+    
+    useEffect(() => {
+        if (showEditInput) {
+            const keyDownHandler = (e) => {
+                if (e.key === 'Enter') {
+                    setName(nameInputRef.current.value);
+                    setShowEditInput(false);
+                }
+            }
+            window.addEventListener('keydown', keyDownHandler)
+            return () => {
+                window.removeEventListener('keydown', keyDownHandler)
+            }
+        }
+    }, [showEditInput])
+
     return (
         <div className='home-header-container'>
             <div className='greeting'>
-                <h3>Hi {name},</h3>
+                <div className='name-container'>
+                    <h3>Hi {name},</h3>
+                    <img className='edit' src={Edit} alt='Edit' onClick={handleEditClick}/>
+                    {showEditInput && <input className='edit-name-input' type='text' autoFocus ref={nameInputRef} />}
+                </div>
                 <p>Let's be productive</p>
             </div>
             { showAddForm && <AddTaskForm setShowAddForm={setShowAddForm} btnRef={btnRef} /> }
