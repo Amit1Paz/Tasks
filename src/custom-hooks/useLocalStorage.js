@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
-const PREFIX = 'amit-tasks-app-';
 
 const Uselocalstorage = (key , initialValue) => {
+    const PREFIX = 'amit-tasks-app-';
     const preFixedKey = PREFIX + key;
     const [value, setValue] = useState(() => {
-        const jasonValue = localStorage.getItem(preFixedKey)
-        if (jasonValue != null) {
-            return JSON.parse(jasonValue);
+        const jsonValue = localStorage.getItem(preFixedKey)
+        if (jsonValue) {
+            return JSON.parse(jsonValue);
         }
         if (typeof initialValue === 'function') {
             return initialValue();

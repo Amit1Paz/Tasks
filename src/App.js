@@ -3,18 +3,18 @@ import { useState } from 'react';
 import Menu from "./Menu";
 import Home from './Home/Home';
 import Achievements from './Achievements/Achievements';
-import Settings from './Settings';
 import TopBar from './TopBar';
 import TasksListContext from './Contexts/TasksListContext';
 import DoneListContext from './Contexts/DoneListContext';
 import WeeklyGoalContext from './Contexts/WeeklyGoalContext';
+import Uselocalstorage from './custom-hooks/useLocalStorage';
 
 function App() {
-  const [name, setName] = useState('Amit');
-  const [activeTab, setActiveTab] = useState('Home');
-  const [tasksList, setTasksList] = useState([]);
-  const [doneList, setDoneList] = useState([]); 
-  const [weeklyGoal, setWeeklyGoal] = useState(1);
+  const [name, setName] = Uselocalstorage('name', 'Amit');
+  const [activeTab, setActiveTab] = Uselocalstorage('activeTab', 'Home');
+  const [tasksList, setTasksList] = Uselocalstorage ('tasksList', [])
+  const [doneList, setDoneList] = Uselocalstorage('doneList', []); 
+  const [weeklyGoal, setWeeklyGoal] = Uselocalstorage('weeklyGoal', 1);
 
   return (
     <div className='container'>
@@ -26,9 +26,8 @@ function App() {
             <WeeklyGoalContext.Provider value={[weeklyGoal, setWeeklyGoal]}>
               {activeTab === 'Achievements' && <Achievements />}
             </WeeklyGoalContext.Provider>
-            {activeTab === 'Settings' && <Settings />}
             <TasksListContext.Provider value={[tasksList, setTasksList]}>
-              {activeTab === 'Home' && <Home name={name} />}
+              {activeTab === 'Home' && <Home name={name} setName={setName} />}
             </TasksListContext.Provider>
           </div>
         </DoneListContext.Provider>

@@ -13,9 +13,7 @@ const Menu = ({ setActiveTab, activeTab }) => {
 
     const [menuTabs, setMenuTabs] = useState([
         {name: 'Home', icon: Home, style: className.notSelected},
-        {name: 'Achievements', icon: Goals, style: className.notSelected},
-        {name: 'Search', icon: Search, style: className.notSelected},
-        {name: 'Settings', icon: Settings, style: className.notSelected}
+        {name: 'Achievements', icon: Goals, style: className.notSelected}
     ])
 
     const handleClick = (name) => {

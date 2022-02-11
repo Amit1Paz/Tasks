@@ -22,13 +22,35 @@
 .home-container {
     width: 90%;
 }
+
+/* home header */
 .home-header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.name-container {
+    position: relative;
+}
 .greeting h3 {
     color: var(--white);
+}
+.edit {
+    position: absolute;
+    width: 0.8rem;
+    top: 0;
+    right: -1rem;
+}
+.edit-name-input {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1.5rem;
+    background-color: var(--dark-background);
+    color: var(--light-gray);
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 1px solid var(--light-gray);
 }
 .add-task-btn {
     font-size: 1.5rem;
