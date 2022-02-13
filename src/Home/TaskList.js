@@ -4,9 +4,11 @@ import TasksHeadlines from './TasksHeadlines';
 import TasksListContext from '../Contexts/TasksListContext';
 import SortListContext from '../Contexts/SortListContext';
 
+
 const Tasklist = () => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [selectedSort, setSelectedSort] = useContext(SortListContext);
+
     const [order, setOrder] = useState([]);
     const [sort, setSort] = useState();
 
@@ -87,7 +89,17 @@ const Tasklist = () => {
             </div>
             <TasksHeadlines />
             <ul className='tasks-wrap'>
-                <Task setSelectedSort={setSelectedSort}/>
+                {tasksList.map(task => {
+                   return <Task setSelectedSort={setSelectedSort}
+                    key={task.index}
+                    index={task.index}
+                    content={task.content}
+                    priority={task.priority}
+                    status={task.status}
+                    date={task.date}
+                    time={task.time}
+                    />
+                })}
             </ul>
         </div>
     );

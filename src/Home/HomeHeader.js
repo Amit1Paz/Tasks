@@ -46,13 +46,10 @@ const Homeheader = ({ name, setName }) => {
 
     return (
         <div className='home-header-container'>
-            <div className='greeting'>
-                <div className='name-container'>
-                    <h3>Hi {name},</h3>
-                    <img className='edit' src={Edit} alt='Edit' onClick={handleEditClick}/>
-                    {showEditInput && <input className='edit-name-input' type='text' autoFocus ref={nameInputRef} />}
-                </div>
-                <p>Let's be productive</p>
+            <div className='name-container'>
+                <h3>Hi {name},</h3>
+                <img className='edit' src={Edit} alt='Edit' onClick={handleEditClick}/>
+                {showEditInput && <input className='edit-name-input' type='text' autoFocus ref={nameInputRef} />}
             </div>
             { showAddForm && <AddTaskForm setShowAddForm={setShowAddForm} btnRef={btnRef} /> }
             <button

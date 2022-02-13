@@ -6,22 +6,9 @@ import TaskDropdown from './TaskDropdown';
 import TasksListContext from '../Contexts/TasksListContext';
 import DoneListContext from '../Contexts/DoneListContext';
 
-const Task = ({ setSelectedSort, isDone }) => {
+const Task = (props) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [doneList, setDoneList] = useContext(DoneListContext);
-
-    // const truncatedContent = (content) => {
-    //     const a = content
-    //     if (content.length > 45) {
-    //         content = `${content.slice(0, 42)}...`
-    //     }
-    //     return <p onMouseOver={() => {
-    //         content = a;
-    //         return content
-    //     }}>
-    //         {content} 
-    //     </p>
-    // }
 
     const status = [
         {status: 'Not started', background: colors.status.notStarted},
@@ -101,44 +88,41 @@ const Task = ({ setSelectedSort, isDone }) => {
         return date;
     }
 
-    return <ul>
-        {tasksList.map(task => {
-            return <ul key={task.index} className='task-ul-container'>
-                <li className='task-content'>
-                    {task.content}
+    return <ul className='task-ul-container'>
+        <li className='task-content'>
+            {props.content}
+        </li>
+        <ul className='task-categories'>
+            <ul className='task-priority' style={{backgroundColor: handleBackgroundColor(props.priority)}}>
+                <li>{props.priority}</li>
+                <li>
+                    <TaskDropdown priority={priority} status={status} setDropdownSelectedItem={setDropdownSelectedItem} setCurrentKey={setCurrentKey} id={props.index} handleBackgroundColor={handleBackgroundColor}/>
                 </li>
-                <ul className='task-categories'>
-                    <ul className='task-priority' style={{backgroundColor: handleBackgroundColor(task.priority)}}>
-                        <li>{task.priority}</li>
-                        <li>
-                            <TaskDropdown priority={priority} status={status} setDropdownSelectedItem={setDropdownSelectedItem} setCurrentKey={setCurrentKey} id={task.index} handleBackgroundColor={handleBackgroundColor}/>
-                        </li>
-                    </ul>
-
-                    <ul className='task-status' style={{backgroundColor: handleBackgroundColor(task.status)}}>
-                        <li>{task.status}</li>
-                        <li>
-                            <TaskDropdown priority={priority} status={status} setDropdownSelectedItem={setDropdownSelectedItem} setCurrentKey={setCurrentKey} id={task.index} handleBackgroundColor={handleBackgroundColor}/>
-                        </li>
-                    </ul>
-
-                    <ul className='task-date-time'>
-                        <li>{task.date}</li>
-                        <li className='task-time'>{task.time}</li>
-                    </ul>
-                    {task.status !== 'Done' && 
-                        <li className='task-delete' onClick={() => handleDeleteTaskClick(task.index)}>
-                            <img src={Delete} alt='Delete'/>
-                        </li>
-                    }
-                    {task.status === 'Done' &&
-                        <li className='task-check' onClick={() => handleCheckTaskClick(task.index)}>
-                            <img src={Check} alt='V'/>
-                        </li>
-                    }
-                </ul>
             </ul>
-        })}
+
+            <ul className='task-status' style={{backgroundColor: handleBackgroundColor(props.status)}}>
+                <li>{props.status}</li>
+                <li>
+                    <TaskDropdown priority={priority} status={status} setDropdownSelectedItem={setDropdownSelectedItem} setCurrentKey={setCurrentKey} id={props.index} handleBackgroundColor={handleBackgroundColor}/>
+                </li>
+            </ul>
+
+            <ul className='task-date-time'>
+                <li>{props.date}</li>
+                <li className='task-time'>{props.time}</li>
+            </ul>
+            {props.status !== 'Done' && 
+                <li className='task-delete' onClick={() => handleDeleteTaskClick(props.index)}>
+                    <img src={Delete} alt='Delete'/>
+                </li>
+            }
+            {props.status === 'Done' &&
+                <li className='task-check' onClick={() => handleCheckTaskClick(props.index)}>
+                    <img src={Check} alt='V'/>
+                </li>
+            }
+        </ul>
     </ul>
 }
+
 export default Task;
