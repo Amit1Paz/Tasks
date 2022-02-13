@@ -10,19 +10,6 @@ const Task = ({ setSelectedSort, isDone }) => {
     const [tasksList, setTasksList] = useContext(TasksListContext);
     const [doneList, setDoneList] = useContext(DoneListContext);
 
-    // const truncatedContent = (content) => {
-    //     const a = content
-    //     if (content.length > 45) {
-    //         content = `${content.slice(0, 42)}...`
-    //     }
-    //     return <p onMouseOver={() => {
-    //         content = a;
-    //         return content
-    //     }}>
-    //         {content} 
-    //     </p>
-    // }
-
     const status = [
         {status: 'Not started', background: colors.status.notStarted},
         {status: 'Working on it', background: colors.status.workingOnIt},
